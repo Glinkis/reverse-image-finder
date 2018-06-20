@@ -1,0 +1,35 @@
+{
+  "env": {
+    "development": {
+      "application/javascript": {
+        "presets": ["es2016-node5", "react"],
+        "sourceMaps": "inline"
+      },
+      "text/typescript":{
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "inlineSourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "jsx": "react"
+      }
+    },
+    "production": {
+      "application/javascript": {
+        "presets": ["es2016-node5", "react"],
+        "sourceMaps": "none"
+      },
+      "text/typescript": {
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "jsx": "react"
+      }
+    }
+  }
+}
