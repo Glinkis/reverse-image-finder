@@ -20,5 +20,8 @@ export const SelectImageFile = () => (
 );
 
 export const SelectedImageFile = observer(() => (
-  <div>{store.image && store.image.split("\\").reverse()[0]}</div>
+  <div>
+    {store.image ? <img src={store.image} width="25%" /> : null}
+    {store.image ? <div>{store.image.split("\\").reverse()[0]}</div> : null}
+  </div>
 ));
