@@ -1,15 +1,41 @@
-const {
+import {
   app,
   BrowserWindow
-} = require('electron')
+} from "electron";
+import * as url from "url";
+import * as path from "path";
+
+let win;
 
 function createWindow() {
-  window = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600
-  })
+  });
 
-  window.loadFile('app/index.html')
+  win.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "./src/index.html"),
+      protocol: "file:",
+      slashes: true
+    })
+  );
+
+  win.on("closed", () => {
+    win = null;
+  });
 }
 
-app.on('ready', createWindow)
+app.on("ready", createWindow);
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});
+
+app.on("activate", () => {
+  if (win === null) {
+    createWindow();
+  }
+});
