@@ -1,0 +1,23 @@
+{
+  "name": "reverse-image-finder",
+  "version": "0.1.0",
+  "description": "A reverse image finder application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glinkis/reverse-image-finder.git"
+  },
+  "author": "Victor Glindås",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Glinkis/reverse-image-finder/issues"
+  },
+  "homepage": "https://github.com/Glinkis/reverse-image-finder#readme",
+  "devDependencies": {
+    "electron": "^2.0.2"
+  }
+}
