@@ -10,7 +10,7 @@ const store = observable({
 const openImage = () => {
   store.image = remote.dialog.showOpenDialog({
     title: "Select Image",
-    filters: [{ name: "Image", extensions: ["png", "jpg", "jpeg"] }],
+    filters: [{ name: "Image", extensions: ["png", "jpg", "jpeg", "tif"] }],
     properties: ["openFile"]
   })[0];
 };
@@ -20,8 +20,8 @@ export const SelectImageFile = () => (
 );
 
 export const SelectedImageFile = observer(() => (
-  <div>
-    {store.image ? <img src={store.image} width="25%" /> : null}
+  <>
+    {store.image ? <img src={store.image} width="50%" /> : null}
     {store.image ? <div>{store.image.split("\\").reverse()[0]}</div> : null}
-  </div>
+  </>
 ));

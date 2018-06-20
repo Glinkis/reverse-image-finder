@@ -6,9 +6,12 @@ let win: BrowserWindow | null;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 500,
+    height: 500
   });
+
+  win.setMenu(null);
+  win.setResizable(false);
 
   win.loadURL(
     url.format({
