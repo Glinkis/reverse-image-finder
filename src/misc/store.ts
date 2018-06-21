@@ -15,5 +15,5 @@ export const store = observable({
   isSearching: false,
   images: [],
   errors: [],
-  extensions: ["jpg", "jpeg", "png", "gif", "tif", "tiff", "eps", "svg", "tga"]
+  extensions: ["jpg", "jpeg", "png", "gif"]
 } as IStore);

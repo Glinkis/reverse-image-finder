@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { store } from "./store";
 
 type Done = (error: Error | null, results?: string[]) => void;
 
@@ -35,7 +36,11 @@ export const walkDirectory = (dir: string, done: Done) => {
             }
           });
         } else {
-          results.push(file);
+          for (const extension of store.extensions) {
+            if (path.extname(file) === `.${extension}`) {
+              results.push(file);
+            }
+          }
           if (!--pending) {
             done(null, results);
           }

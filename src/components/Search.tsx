@@ -5,7 +5,7 @@ import { StopSearch } from "./StopSearch";
 import { StartSearch } from "./StartSearch";
 
 export const Search = observer(() => {
-  if (store.image === null || store.directory === null) {
+  if (store.directory === null) {
     return null;
   }
   return store.isSearching ? <StopSearch /> : <StartSearch />;

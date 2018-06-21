@@ -9,7 +9,7 @@ import * as path from "path";
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
 if (isDevMode) {
-  // enableLiveReload({ strategy: "react-hmr" });
+  enableLiveReload({ strategy: "react-hmr" });
 }
 
 let win: BrowserWindow | null;
