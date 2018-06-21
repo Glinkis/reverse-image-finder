@@ -5,5 +5,5 @@ export const compareImage = async (image: string) => {
   const diff = await imageDiffr.exec(store.image, image, {
     threshold: 0
   });
-  return diff.percent < 0.02;
+  return diff.percent < store.threshold;
 };
