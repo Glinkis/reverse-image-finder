@@ -1,11 +1,17 @@
 import * as React from "react";
 import { remote } from "electron";
-import { observable } from "mobx";
 import { observer } from "mobx-react";
+import { store } from "../misc/store";
 
-const store = observable({
-  directory: null
-});
+export const SelectDirectory = () => (
+  <button id="select-directory" onClick={openDirectory}>
+    Directory
+  </button>
+);
+
+export const SelectedDirectory = observer(() => (
+  <div id="selected-directory">{store.directory}</div>
+));
 
 const openDirectory = () => {
   store.directory = remote.dialog.showOpenDialog({
@@ -13,9 +19,3 @@ const openDirectory = () => {
     properties: ["openDirectory"]
   })[0];
 };
-
-export const SelectDirectory = () => (
-  <button onClick={openDirectory}>Directory</button>
-);
-
-export const SelectedDirectory = observer(() => <div>{store.directory}</div>);

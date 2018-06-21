@@ -1,11 +1,20 @@
 import * as React from "react";
 import { remote } from "electron";
-import { observable } from "mobx";
 import { observer } from "mobx-react";
+import { store } from "../misc/store";
 
-const store = observable({
-  image: null
-});
+export const SelectImageFile = () => (
+  <button id="select-image-file" onClick={openImage}>
+    Select Image
+  </button>
+);
+
+export const SelectedImageFile = observer(() => (
+  <div id="selected-image-file">
+    {store.image ? <img src={store.image} /> : null}
+    {store.image ? <span>{store.image.split("\\").reverse()[0]}</span> : null}
+  </div>
+));
 
 const openImage = () => {
   store.image = remote.dialog.showOpenDialog({
@@ -14,14 +23,3 @@ const openImage = () => {
     properties: ["openFile"]
   })[0];
 };
-
-export const SelectImageFile = () => (
-  <button onClick={openImage}>Select Image</button>
-);
-
-export const SelectedImageFile = observer(() => (
-  <>
-    {store.image ? <img src={store.image} width="50%" /> : null}
-    {store.image ? <div>{store.image.split("\\").reverse()[0]}</div> : null}
-  </>
-));
