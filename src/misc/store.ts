@@ -5,7 +5,6 @@ export interface IStore {
   directory: string | null;
   isSearching: boolean;
   images: string[];
-  errors: Error[];
   extensions: string[];
 }
 
@@ -14,6 +13,5 @@ export const store = observable({
   directory: null,
   isSearching: false,
   images: [],
-  errors: [],
   extensions: ["jpg", "jpeg", "png", "gif"]
 } as IStore);
