@@ -19,7 +19,7 @@ export const SelectedImageFile = observer(() => (
 const openImage = () => {
   store.image = remote.dialog.showOpenDialog({
     title: "Select Image",
-    filters: [{ name: "Image", extensions: ["png", "jpg", "jpeg", "tif"] }],
+    filters: [{ name: "Image", extensions: store.extensions }],
     properties: ["openFile"]
   })[0];
 };

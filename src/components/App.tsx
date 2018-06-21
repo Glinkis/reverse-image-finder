@@ -2,7 +2,7 @@ import * as React from "react";
 import { SelectDirectory, SelectedDirectory } from "./SelectDirectory";
 import { SelectImageFile, SelectedImageFile } from "./SelectImageFile";
 import { Search } from "./Search";
-import { SimilarImages } from "./SimilarImages";
+import { Images } from "./Images";
 
 export const App = () => (
   <div id="app">
@@ -11,6 +11,6 @@ export const App = () => (
     <SelectDirectory />
     <SelectedDirectory />
     <Search />
-    <SimilarImages />
+    <Images />
   </div>
 );

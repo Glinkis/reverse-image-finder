@@ -1,20 +1,19 @@
 import { observable } from "mobx";
 
-export interface IFile {
-  path: string;
-  name: string;
-}
-
 export interface IStore {
   image: string | null;
   directory: string | null;
   isSearching: boolean;
-  similarImages: IFile[];
+  images: string[];
+  errors: Error[];
+  extensions: string[];
 }
 
 export const store = observable({
   image: null,
   directory: null,
   isSearching: false,
-  similarImages: []
+  images: [],
+  errors: [],
+  extensions: ["jpg", "jpeg", "png", "gif", "tif", "tiff", "eps", "svg", "tga"]
 } as IStore);
