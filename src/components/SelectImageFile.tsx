@@ -3,6 +3,7 @@ import { remote } from "electron";
 import { observer } from "mobx-react";
 import { store } from "../misc/store";
 import * as path from "path";
+import { parseImage } from "../misc/compareImages";
 
 export const SelectImageFile = () => (
   <button id="select-image-file" onClick={openImage}>
@@ -23,4 +24,8 @@ const openImage = () => {
     filters: [{ name: "Image", extensions: store.extensions }],
     properties: ["openFile"]
   })[0];
+
+  parseImage(store.image).then(data => {
+    store.imageData = data;
+  });
 };

@@ -7,6 +7,7 @@ export interface IStore {
   images: string[];
   extensions: string[];
   threshold: number;
+  imageData: ImageData;
 }
 
 export const store = observable({
@@ -14,6 +15,7 @@ export const store = observable({
   directory: null,
   isSearching: false,
   images: [],
-  extensions: ["jpg", "jpeg", "png", "gif"],
-  threshold: 0.02
+  extensions: ["jpg", "jpeg", "png", "psd"],
+  threshold: 0.02,
+  imageData: null
 } as IStore);
