@@ -1,25 +1,39 @@
 import { app, BrowserWindow } from "electron";
+import { enableLiveReload } from "electron-compile";
+import installExtension, {
+  REACT_DEVELOPER_TOOLS
+} from "electron-devtools-installer";
 import * as url from "url";
 import * as path from "path";
 
+const isDevMode = process.execPath.match(/[\\/]electron/);
+
+if (isDevMode) {
+  enableLiveReload({ strategy: "react-hmr" });
+}
+
 let win: BrowserWindow | null;
 
-function createWindow() {
+async function createWindow() {
   win = new BrowserWindow({
-    width: 500,
+    width: isDevMode ? 1000 : 500,
     height: 500
   });
 
   win.setMenu(null);
-  win.setResizable(false);
 
   win.loadURL(
     url.format({
-      pathname: path.join(__dirname, "./src/index.html"),
+      pathname: path.join(__dirname, "./index.html"),
       protocol: "file:",
       slashes: true
     })
   );
+
+  if (isDevMode) {
+    await installExtension(REACT_DEVELOPER_TOOLS);
+    win.webContents.openDevTools();
+  }
 
   win.on("closed", () => {
     win = null;
