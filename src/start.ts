@@ -17,10 +17,9 @@ let win: BrowserWindow | null;
 async function createWindow() {
   win = new BrowserWindow({
     width: isDevMode ? 1000 : 500,
-    height: 500
+    height: 500,
+    title: "Reverse Image Finder"
   });
-
-  win.setMenu(null);
 
   win.loadURL(
     url.format({

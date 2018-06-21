@@ -9,7 +9,8 @@
         "experimentalDecorators": true,
         "allowJs": true,
         "jsx": "react",
-        "strict": true
+        "strict": true,
+        "lib": ["dom"]
       }
     },
     "production": {
@@ -20,7 +21,7 @@
         "experimentalDecorators": true,
         "allowJs": true,
         "jsx": "react",
-        "strict": true
+        "lib": ["dom"]
       }
     }
   }
