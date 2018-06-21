@@ -10,7 +10,7 @@ export const Threshold = observer(
         <input
           type="range"
           min="0"
-          max="0.3"
+          max="1"
           step="0.001"
           value={store.threshold}
           onChange={e => (store.threshold = Number((e.target as any).value))}

@@ -10,6 +10,9 @@ export const searchForFiles = () => {
     }
     if (files) {
       for (const file of files) {
+        if (file === store.image) {
+          continue;
+        }
         compareImage(file).then(isSimilar => {
           if (isSimilar) {
             store.images.push(file);

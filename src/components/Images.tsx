@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as path from "path";
 import { observer } from "mobx-react";
 import { store } from "../misc/store";
 import { shell } from "electron";
@@ -11,8 +12,9 @@ const imageRow = (image: string, i: number) => {
   const onClick = () => shell.showItemInFolder(image);
   return (
     <div key={i}>
+      <img src={image} width="75px" />
       <a href="#" onClick={onClick}>
-        {image}
+        {path.basename(image)}
       </a>
     </div>
   );

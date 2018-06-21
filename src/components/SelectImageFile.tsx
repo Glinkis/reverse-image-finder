@@ -12,6 +12,7 @@ export const SelectImageFile = () => (
 
 export const SelectedImageFile = observer(() => (
   <div id="selected-image-file">
+    {store.image ? <img src={store.image} width="75px" /> : null}
     {store.image ? <span>{path.basename(store.image)}</span> : null}
   </div>
 ));
