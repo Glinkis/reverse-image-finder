@@ -46,14 +46,18 @@
   },
   "build": {
     "productName": "Reverse Image Finder",
-    "dmg": {
-      "publish": ["github"]
+    "publish": {
+      "provider": "github",
+      "owner": "Glinkis",
+      "repo": "reverse-image-finder",
+      "private": false
     },
+    "dmg": {},
     "win": {
       "target": [
-        "nsis"
-      ],
-      "publish": ["github"]
+        "nsis",
+        "zip"
+      ]
     },
     "nsis": {
       "oneClick": false,
