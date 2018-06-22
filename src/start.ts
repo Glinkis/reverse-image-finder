@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import { enableLiveReload } from "electron-compile";
+import { autoUpdater } from "electron-updater";
 import installExtension, {
   REACT_DEVELOPER_TOOLS
 } from "electron-devtools-installer";
@@ -39,7 +40,10 @@ async function createWindow() {
   });
 }
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow();
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
