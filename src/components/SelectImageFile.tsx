@@ -3,7 +3,6 @@ import { remote } from "electron";
 import { observer } from "mobx-react";
 import { store } from "../misc/store";
 import * as path from "path";
-import { parseImage, resizeImage } from "../misc/compareImages";
 
 export const SelectImageFile = () => (
   <button id="select-image-file" onClick={openImage}>

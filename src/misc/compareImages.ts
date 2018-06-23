@@ -3,21 +3,17 @@ import * as pixelmatch from "pixelmatch";
 import * as path from "path";
 import { decodePsd } from "../decoders/decodePsd";
 import { store } from "./store";
-
-const WIDTH = 256;
-const HEIGHT = 256;
-
-const canvas = document.createElement("canvas");
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
+import { decodePng } from "../decoders/decodePng";
+import { decodeJpg } from "../decoders/decodeJpg";
+import { resizeImageData, Image } from "./resizeImageData";
 
 export const compareImages = async (a: string, b: string) => {
   const image1 = await cacheImageData(a);
   const image2 = await cacheImageData(b);
 
   const match = pixelmatch(
-    new Uint8Array(image1.data),
-    new Uint8Array(image2.data),
+    image1.data,
+    image2.data,
     null,
     image1.width,
     image1.height,
@@ -29,31 +25,36 @@ export const compareImages = async (a: string, b: string) => {
   return match / image1.data.length < store.threshold;
 };
 
-export const resizeImage = async (path: string) => {
-  const img = new Image();
-  img.src = await parseImage(path);
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  ctx.drawImage(img, 0, 0, WIDTH, HEIGHT);
-  return ctx.getImageData(0, 0, WIDTH, HEIGHT);
+const bufferToUint8Array = (buffer: Buffer) => {
+  const array = new Uint8Array(buffer.length);
+  for (let i = 0; i < buffer.length; i++) {
+    array[i] = buffer[i];
+  }
+  return array;
 };
 
-export const parseImage = async (image: string) => {
+const width = 256;
+const height = 256;
+const cache = new Map<string, Image>();
+
+const cacheImageData = async (image: string) => {
+  if (!cache.has(image)) {
+    const decoded = await decodeImage(image);
+    const resized = resizeImageData(decoded, width, height);
+    cache.set(image, resized);
+  }
+  return cache.get(image) as Image;
+};
+
+export const decodeImage = async (image: string) => {
   const ext = path.extname(image).toLowerCase();
   switch (ext) {
     case ".jpg":
-      return image;
+      return await decodeJpg(image);
     case ".png":
-      return image;
+      return await decodePng(image);
     case ".psd":
       return await decodePsd(image);
   }
   throw new Error(`Invalid extension: ${ext}.`);
-};
-
-const cache = new Map<string, ImageData>();
-const cacheImageData = async (image: string) => {
-  if (!cache.has(image)) {
-    cache.set(image, await resizeImage(image));
-  }
-  return cache.get(image) as ImageData;
 };
