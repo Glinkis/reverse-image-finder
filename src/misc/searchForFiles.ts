@@ -1,6 +1,6 @@
 import { walkDirectory } from "./walkDirectory";
 import { store } from "./store";
-import { compareImage } from "./compareImages";
+import { compareImages } from "./compareImages";
 
 export const searchForFiles = () => {
   if (!store.directory) {
@@ -11,14 +11,14 @@ export const searchForFiles = () => {
     if (error) {
       console.error(error);
     }
-    if (!files) {
+    if (!files || !store.image) {
       return;
     }
     for (const file of files) {
       if (file === store.image) {
         continue;
       }
-      compareImage(file).then(isSimilar => {
+      compareImages(store.image, file).then(isSimilar => {
         if (isSimilar) {
           store.images.push(file);
         }

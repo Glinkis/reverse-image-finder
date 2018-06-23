@@ -4,6 +4,9 @@ import * as PSD from "psd";
 export const decodePsd = async (image: string) => {
   const psd = await PSD.open(image);
   const png = psd.image.toPng();
+  psd.image.saveAsPng(__dirname + "/bah.png").then(function() {
+    console.log("Exported!");
+  });
   return "data:image/png;base64," + byteArrayToBase64(png.data);
 };
 

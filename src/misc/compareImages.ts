@@ -11,21 +11,22 @@ const canvas = document.createElement("canvas");
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-export const compareImage = async (path: string) => {
-  const imageData = await resizeImage(path);
+export const compareImages = async (a: string, b: string) => {
+  const image1 = await cacheImageData(a);
+  const image2 = await cacheImageData(b);
 
   const match = pixelmatch(
-    store.imageData.data as any,
-    imageData.data as any,
+    new Uint8Array(image1.data),
+    new Uint8Array(image2.data),
     null,
-    imageData.width,
-    imageData.height,
+    image1.width,
+    image1.height,
     {
       threshold: store.threshold
     }
   );
 
-  return match / store.imageData.data.length < store.threshold;
+  return match / image1.data.length < store.threshold;
 };
 
 export const resizeImage = async (path: string) => {
@@ -47,4 +48,12 @@ export const parseImage = async (image: string) => {
       return await decodePsd(image);
   }
   throw new Error(`Invalid extension: ${ext}.`);
+};
+
+const cache = new Map<string, ImageData>();
+const cacheImageData = async (image: string) => {
+  if (!cache.has(image)) {
+    cache.set(image, await resizeImage(image));
+  }
+  return cache.get(image) as ImageData;
 };

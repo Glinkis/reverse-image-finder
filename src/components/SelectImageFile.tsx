@@ -18,12 +18,10 @@ export const SelectedImageFile = observer(() => (
   </div>
 ));
 
-const openImage = async () => {
+const openImage = () => {
   store.image = remote.dialog.showOpenDialog({
     title: "Select Image",
     filters: [{ name: "Image", extensions: store.extensions }],
     properties: ["openFile"]
   })[0];
-
-  store.imageData = await resizeImage(store.image);
 };
