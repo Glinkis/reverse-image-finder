@@ -33,8 +33,8 @@ const bufferToUint8Array = (buffer: Buffer) => {
   return array;
 };
 
-const width = 256;
-const height = 256;
+const width = 64;
+const height = 64;
 const cache = new Map<string, Image>();
 
 const cacheImageData = async (image: string) => {

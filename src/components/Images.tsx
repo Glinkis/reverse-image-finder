@@ -5,7 +5,14 @@ import { store } from "../misc/store";
 import { shell } from "electron";
 
 export const Images = observer(() => {
-  return <div>{store.images.map(imageRow)}</div>;
+  return (
+    <div>
+      <div>
+        {store.searchedFiles ? `Searched ${store.searchedFiles} files.` : null}
+      </div>
+      {store.images.map(imageRow)}
+    </div>
+  );
 });
 
 const imageRow = (image: string, i: number) => {

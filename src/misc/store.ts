@@ -7,6 +7,7 @@ export interface IStore {
   images: string[];
   extensions: string[];
   threshold: number;
+  searchedFiles: number;
 }
 
 export const store = observable({
@@ -15,5 +16,6 @@ export const store = observable({
   isSearching: false,
   images: [],
   extensions: ["jpg", "jpeg", "png", "psd"],
-  threshold: 0.02
+  threshold: 0.02,
+  searchedFiles: 0
 } as IStore);

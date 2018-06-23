@@ -6,6 +6,7 @@ type Done = (error: Error | null, results?: string[]) => void;
 
 export const walkDirectory = (dir: string, done: Done) => {
   let results: string[] = [];
+  store.searchedFiles = 0;
 
   fs.readdir(dir, (error: Error, list: string[]) => {
     if (error) {
@@ -41,6 +42,7 @@ export const walkDirectory = (dir: string, done: Done) => {
               results.push(file);
             }
           }
+          store.searchedFiles++;
           if (!--pending) {
             done(null, results);
           }
