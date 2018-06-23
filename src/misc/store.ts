@@ -7,7 +7,7 @@ export interface IStore {
   images: string[];
   extensions: string[];
   threshold: number;
-  imageData: ImageData;
+  imageData: ImageData | null;
 }
 
 export const store = observable({
