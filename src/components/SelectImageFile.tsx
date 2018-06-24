@@ -2,7 +2,7 @@ import * as React from "react";
 import { remote } from "electron";
 import { observer } from "mobx-react";
 import { store } from "../misc/store";
-import * as path from "path";
+import { imageRow } from "./Images";
 
 export const SelectImageFile = () => (
   <button id="select-image-file" onClick={openImage}>
@@ -10,12 +10,9 @@ export const SelectImageFile = () => (
   </button>
 );
 
-export const SelectedImageFile = observer(() => (
-  <div id="selected-image-file">
-    {store.image ? <img src={store.image} width="75px" /> : null}
-    {store.image ? <span>{path.basename(store.image)}</span> : null}
-  </div>
-));
+export const SelectedImageFile = observer(
+  () => (store.image ? imageRow(store.image) : null)
+);
 
 const openImage = () => {
   store.image = remote.dialog.showOpenDialog({

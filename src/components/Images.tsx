@@ -7,22 +7,16 @@ import { shell } from "electron";
 export const Images = observer(() => {
   return (
     <div>
-      <div>
-        {store.searchedFiles ? `Searched ${store.searchedFiles} files.` : null}
-      </div>
+      {store.searchedFiles ? `Searched ${store.searchedFiles} files.` : null}
       {store.images.map(imageRow)}
     </div>
   );
 });
 
-const imageRow = (image: string, i: number) => {
-  const onClick = () => shell.showItemInFolder(image);
-  return (
-    <div key={i}>
-      <img src={image} width="75px" />
-      <a href="#" onClick={onClick}>
-        {path.basename(image)}
-      </a>
-    </div>
-  );
-};
+export const imageRow = (image: string, i?: number) => (
+  <div key={i}>
+    <a href="#" onClick={() => shell.showItemInFolder(image)}>
+      {path.basename(image)}
+    </a>
+  </div>
+);
