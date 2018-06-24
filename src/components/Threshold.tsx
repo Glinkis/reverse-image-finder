@@ -6,14 +6,14 @@ export const Threshold = observer(
   () =>
     store.directory && store.image ? (
       <div>
-        <div>Threshold: {store.threshold}</div>
+        <div>Threshold: {store.threshold.toPrecision(1)}</div>
         <input
           type="range"
           min="0"
-          max="0.05"
+          max="1"
           step="0.001"
-          value={store.threshold}
-          onChange={e => (store.threshold = Number((e.target as any).value))}
+          value={Math.sqrt(store.threshold)}
+          onChange={e => (store.threshold = (e.target as any).value ** 2)}
         />
       </div>
     ) : null
