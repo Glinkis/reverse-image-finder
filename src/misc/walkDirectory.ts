@@ -5,8 +5,8 @@ import { store } from "./store";
 type Done = (error: Error | null, results?: string[]) => void;
 
 export const walkDirectory = (dir: string, done: Done) => {
+  store.isSearching = true;
   let results: string[] = [];
-  store.searchedFiles = 0;
 
   fs.readdir(dir, (error: Error, list: string[]) => {
     if (error) {
