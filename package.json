@@ -9,7 +9,7 @@
     "dist": "electron-builder",
     "publish": "electron-builder --publish always",
     "test": "mocha test.ts --require ts-node/register test/**/*.test.ts",
-    "test:w": "mocha test.ts --require ts-node/register --watch test/**/*.test.ts "
+    "test:w": "mocha test.ts --require ts-node/register --watch --watch-extensions ts test/**/*.test.ts "
   },
   "repository": {
     "type": "git",
