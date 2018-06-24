@@ -25,28 +25,21 @@ export const compareImages = async (a: string, b: string) => {
   return match / image1.data.length < store.threshold;
 };
 
-const bufferToUint8Array = (buffer: Buffer) => {
-  const array = new Uint8Array(buffer.length);
-  for (let i = 0; i < buffer.length; i++) {
-    array[i] = buffer[i];
-  }
-  return array;
-};
-
 const width = 64;
 const height = 64;
 const cache = new Map<string, Image>();
 
 const cacheImageData = async (image: string) => {
-  if (!cache.has(image)) {
-    const decoded = await decodeImage(image);
-    const resized = resizeImageData(decoded, width, height);
-    cache.set(image, resized);
+  if (cache.has(image)) {
+    return cache.get(image) as Image;
   }
-  return cache.get(image) as Image;
+  const decoded = await decodeImage(image);
+  const resized = resizeImageData(decoded, width, height);
+  cache.set(image, resized);
+  return resized as Image;
 };
 
-export const decodeImage = async (image: string) => {
+const decodeImage = async (image: string) => {
   const ext = path.extname(image).toLowerCase();
   switch (ext) {
     case ".jpg":
