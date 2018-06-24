@@ -1,10 +1,10 @@
 // @ts-ignoreimport { decodePng } from "./decodePng";
 import * as pixelmatch from "pixelmatch";
 import * as path from "path";
-import { decodePsd } from "../decoders/decodePsd";
 import { store } from "./store";
-import { decodePng } from "../decoders/decodePng";
 import { decodeJpg } from "../decoders/decodeJpg";
+import { decodePng } from "../decoders/decodePng";
+import { decodePsd } from "../decoders/decodePsd";
 import { resizeImageData, Image } from "./resizeImageData";
 
 export const compareImages = async (a: string, b: string) => {
