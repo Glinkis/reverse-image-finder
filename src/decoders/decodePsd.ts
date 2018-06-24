@@ -1,8 +1,11 @@
 // @ts-ignore
 import * as PSD from "psd";
-import { PNG } from "../../node_modules/@types/pngjs";
 
 export const decodePsd = async (image: string) => {
   const psd = await PSD.open(image);
-  return psd.image.toPng() as PNG;
+  return {
+    data: psd.image.pixelData,
+    width: psd.image.width(),
+    height: psd.image.height()
+  };
 };
