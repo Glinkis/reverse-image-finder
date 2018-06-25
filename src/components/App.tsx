@@ -4,6 +4,7 @@ import { SelectImageFile, SelectedImageFile } from "./SelectImageFile";
 import { Search } from "./Search";
 import { Images } from "./Images";
 import { Threshold } from "./Threshold";
+import { ClearIndexed } from "./ClearIndexed";
 
 export const App = () => (
   <div id="app">
@@ -11,6 +12,7 @@ export const App = () => (
     <SelectedImageFile />
     <SelectDirectory />
     <SelectedDirectory />
+    <ClearIndexed />
     <Threshold />
     <Search />
     <Images />
