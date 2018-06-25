@@ -2,9 +2,7 @@
 import * as pixelmatch from "pixelmatch";
 import * as path from "path";
 import * as crypto from "crypto";
-import "../decoders/decodeJpg";
-import "../decoders/decodePng";
-import "../decoders/decodePsd";
+import "../decoders/decoders";
 import { store } from "./store";
 import { resizeImageData, Image } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
