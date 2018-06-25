@@ -2,30 +2,26 @@ import { walkDirectory } from "./walkDirectory";
 import { store } from "./store";
 import { compareImages } from "./compareImages";
 
-export const searchForFiles = () => {
+export const searchForFiles = async () => {
   if (!store.directory) {
     return;
   }
   store.searchedFiles = 0;
   store.indexed = 0;
 
-  walkDirectory(store.directory, (error, files) => {
-    store.isSearching = false;
-    if (error) {
-      console.error(error);
+  const files = await walkDirectory(store.directory);
+  store.isSearching = false;
+  if (!files || !store.image) {
+    return;
+  }
+  for (const file of files) {
+    if (file === store.image) {
+      continue;
     }
-    if (!files || !store.image) {
-      return;
-    }
-    for (const file of files) {
-      if (file === store.image) {
-        continue;
+    compareImages(store.image, file).then(isSimilar => {
+      if (isSimilar) {
+        store.images.push(file);
       }
-      compareImages(store.image, file).then(isSimilar => {
-        if (isSimilar) {
-          store.images.push(file);
-        }
-      });
-    }
-  });
+    });
+  }
 };

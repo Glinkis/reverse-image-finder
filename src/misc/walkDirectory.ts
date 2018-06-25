@@ -1,53 +1,43 @@
 import * as fs from "fs";
 import * as path from "path";
 import { store } from "./store";
+import { readdirAsync, statAsync } from "./promisified";
 
 type Done = (error: Error | null, results?: string[]) => void;
 
-export const walkDirectory = (dir: string, done: Done) => {
+export const walkDirectory = async (dir: string) => {
   store.isSearching = true;
   let results: string[] = [];
 
-  fs.readdir(dir, (error: Error, list: string[]) => {
-    if (error) {
-      return done(error);
-    }
+  const list = await readdirAsync(dir);
 
-    let pending = list.length;
-    if (!pending) {
-      return done(null, results);
-    }
+  let pending = list.length;
+  if (!pending) {
+    return results;
+  }
 
-    list.forEach((file: string) => {
-      file = path.resolve(dir, file);
-      fs.stat(file, (error2, stat) => {
-        if (error2) {
-          done(error2);
+  for (let file of list) {
+    file = path.resolve(dir, file);
+    const stat = await statAsync(file);
+
+    if (stat && stat.isDirectory()) {
+      const result = await walkDirectory(file);
+      if (result) {
+        results = results.concat(result);
+      }
+      if (!--pending) {
+        return results;
+      }
+    } else {
+      for (const decoder of store.decoders) {
+        if (path.extname(file) === `.${decoder.ext}`) {
+          results.push(file);
         }
-        if (stat && stat.isDirectory()) {
-          walkDirectory(file, (error3, res) => {
-            if (error3) {
-              done(error3);
-            }
-            if (res) {
-              results = results.concat(res);
-            }
-            if (!--pending) {
-              done(null, results);
-            }
-          });
-        } else {
-          for (const decoder of store.decoders) {
-            if (path.extname(file) === `.${decoder.ext}`) {
-              results.push(file);
-            }
-          }
-          store.searchedFiles++;
-          if (!--pending) {
-            done(null, results);
-          }
-        }
-      });
-    });
-  });
+      }
+      store.searchedFiles++;
+      if (!--pending) {
+        return results;
+      }
+    }
+  }
 };
