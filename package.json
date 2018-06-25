@@ -8,8 +8,8 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "publish": "electron-builder --publish always",
-    "test": "mocha test.ts --require ts-node/register test/**/*.test.ts",
-    "test:w": "mocha test.ts --require ts-node/register --watch --watch-extensions ts test/**/*.test.ts "
+    "test": "electron-mocha -r ts-node/register test/**/*.test.ts",
+    "test:w": "electron-mocha -r ts-node/register --watch --watch-extensions ts test/**/*.test.ts "
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "psd": "3.2.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
-    "react-hot-loader": "4.3.3"
+    "react-hot-loader": "4.3.3",
+    "tiff": "3.0.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.4",
@@ -49,6 +50,7 @@
     "@types/react-dom": "16.0.6",
     "chai": "4.1.2",
     "electron-builder": "20.15.1",
+    "electron-mocha": "6.0.4",
     "electron-prebuilt-compile": "2.0.2",
     "mocha": "5.2.0",
     "ts-node": "7.0.0",
