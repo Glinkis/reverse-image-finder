@@ -29,17 +29,6 @@ export const compareImages = async (a: string, b: string) => {
 
 const width = 64;
 const height = 64;
-const cache = new Map<string, Image>();
-
-const cacheImageData = async (image: string) => {
-  if (cache.has(image)) {
-    return cache.get(image) as Image;
-  }
-  const decoded = await decodeImage(image);
-  const resized = resizeImageData(decoded, width, height);
-  cache.set(image, resized);
-  return resized as Image;
-};
 
 const saveImageData = async (image: string) => {
   const hash = crypto
