@@ -1,26 +1,23 @@
-import { app, remote } from "electron";
 import * as fs from "fs";
+import * as util from "util";
+import { app, remote } from "electron";
 
-const userDataPath = (app || remote.app).getPath("userData");
-const savePath = userDataPath + "/indexed/";
-if (!fs.existsSync(savePath)) {
-  fs.mkdirSync(savePath);
-}
-console.info(userDataPath);
+const indexedDir = (function createIndexDirectory() {
+  const userDataDir = (app || remote.app).getPath("userData");
+  const dir = userDataDir + "/indexed/";
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  return dir;
+})();
 
-export const writePixelData = (path: string, data: Uint8Array) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(savePath + path, data, err => {
-      if (err) reject(err);
-      resolve(data);
-    });
-  });
+const readFileAsync = util.promisify(fs.readFile);
+
+export const readPixelData = async (name: string) => {
+  const pixelData = await readFileAsync(indexedDir + name);
+  return pixelData as Uint8Array;
 };
 
-export const readPixelData = (path: string) => {
-  return new Promise<Uint8Array>((resolve, reject) => {
-    fs.readFile(savePath + path, (err, data) => {
-      resolve(data);
-    });
-  });
+const writeFileAsync = util.promisify(fs.writeFile);
+
+export const writePixelData = async (name: string, data: Uint8Array) => {
+  await writeFileAsync(indexedDir + name, data);
 };
