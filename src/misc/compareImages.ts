@@ -8,6 +8,8 @@ import { resizeImageData, Image } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
 
 export const compareImages = async (a: string, b: string) => {
+  if (a === b) return true;
+
   const image1 = await saveImageData(a);
   const image2 = await saveImageData(b);
 
