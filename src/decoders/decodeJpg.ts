@@ -1,8 +1,9 @@
 import * as jpeg from "jpeg-js";
 import * as fs from "fs";
 import { Image } from "../misc/resizeImageData";
+import { store } from "../misc/store";
 
-export const decodeJpg = async (image: string) => {
+const decodeJpg = async (image: string) => {
   return new Promise<Image>((resolve, reject) => {
     fs.readFile(image, null, (err, encodedData) => {
       if (err) {
@@ -13,3 +14,8 @@ export const decodeJpg = async (image: string) => {
     });
   });
 };
+
+store.decoders.push(
+  { ext: "jpg", decode: decodeJpg },
+  { ext: "jpeg", decode: decodeJpg }
+);

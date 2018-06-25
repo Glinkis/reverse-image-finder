@@ -1,7 +1,8 @@
 // @ts-ignore
 import * as PSD from "psd";
+import { store } from "../misc/store";
 
-export const decodePsd = async (image: string) => {
+const decodePsd = async (image: string) => {
   const psd = await PSD.open(image);
   return {
     data: psd.image.pixelData,
@@ -9,3 +10,5 @@ export const decodePsd = async (image: string) => {
     height: psd.image.height()
   };
 };
+
+store.decoders.push({ ext: "psd", decode: decodePsd });

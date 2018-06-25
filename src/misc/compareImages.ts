@@ -2,10 +2,10 @@
 import * as pixelmatch from "pixelmatch";
 import * as path from "path";
 import * as crypto from "crypto";
+import "../decoders/decodeJpg";
+import "../decoders/decodePng";
+import "../decoders/decodePsd";
 import { store } from "./store";
-import { decodeJpg } from "../decoders/decodeJpg";
-import { decodePng } from "../decoders/decodePng";
-import { decodePsd } from "../decoders/decodePsd";
 import { resizeImageData, Image } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
 
@@ -51,13 +51,10 @@ const saveImageData = async (image: string) => {
 
 const decodeImage = async (image: string) => {
   const ext = path.extname(image).toLowerCase();
-  switch (ext) {
-    case ".jpg":
-      return await decodeJpg(image);
-    case ".png":
-      return await decodePng(image);
-    case ".psd":
-      return await decodePsd(image);
+  for (const decoder of store.decoders) {
+    if (ext === `.${decoder.ext}`) {
+      return await decoder.decode(image);
+    }
   }
   throw new Error(`Invalid extension: ${ext}.`);
 };

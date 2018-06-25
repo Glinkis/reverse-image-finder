@@ -37,8 +37,8 @@ export const walkDirectory = (dir: string, done: Done) => {
             }
           });
         } else {
-          for (const extension of store.extensions) {
-            if (path.extname(file) === `.${extension}`) {
+          for (const decoder of store.decoders) {
+            if (path.extname(file) === `.${decoder.ext}`) {
               results.push(file);
             }
           }
