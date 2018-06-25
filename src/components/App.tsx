@@ -5,6 +5,7 @@ import { Search } from "./Search";
 import { Images } from "./Images";
 import { Threshold } from "./Threshold";
 import { ClearIndexed } from "./ClearIndexed";
+import { SearchStats } from "./SearchStats";
 
 export const App = () => (
   <div id="app">
@@ -15,6 +16,7 @@ export const App = () => (
     <ClearIndexed />
     <Threshold />
     <Search />
+    <SearchStats />
     <Images />
   </div>
 );
