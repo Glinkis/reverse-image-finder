@@ -35,7 +35,7 @@
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-hot-loader": "4.3.3",
-    "tiff": "3.0.0"
+    "utif": "2.0.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.4",

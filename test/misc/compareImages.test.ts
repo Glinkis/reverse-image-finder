@@ -22,6 +22,10 @@ describe("compareImages", () => {
     it("returns true for same PSD", async () => {
       expect(await compareAssets("img0.psd", "img0.psd")).to.be.true;
     });
+
+    it("returns true for same TIFF", async () => {
+      expect(await compareAssets("img2.tif", "img2.tif")).to.be.true;
+    });
   });
 
   describe("compare similar", () => {
