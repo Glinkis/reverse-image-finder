@@ -3,6 +3,9 @@ import { PNG } from "pngjs";
 import { Image } from "../misc/resizeImageData";
 import { store } from "../misc/store";
 
+/**
+ * {@link https://github.com/lukeapage/pngjs}
+ */
 const decodePng = async (image: string) => {
   return new Promise<Image>(resolve => {
     fs.createReadStream(image)
