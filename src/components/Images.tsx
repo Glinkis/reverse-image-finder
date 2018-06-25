@@ -8,6 +8,7 @@ export const Images = observer(() => {
   return (
     <div>
       {store.searchedFiles ? `Searched ${store.searchedFiles} files.` : null}
+      {store.indexed ? `Indexed ${store.indexed} new files.` : null}
       {store.images.map(imageRow)}
     </div>
   );

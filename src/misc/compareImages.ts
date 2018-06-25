@@ -1,15 +1,17 @@
 // @ts-ignoreimport { decodePng } from "./decodePng";
 import * as pixelmatch from "pixelmatch";
 import * as path from "path";
+import * as crypto from "crypto";
 import { store } from "./store";
 import { decodeJpg } from "../decoders/decodeJpg";
 import { decodePng } from "../decoders/decodePng";
 import { decodePsd } from "../decoders/decodePsd";
 import { resizeImageData, Image } from "./resizeImageData";
+import { writePixelData, readPixelData } from "./io";
 
 export const compareImages = async (a: string, b: string) => {
-  const image1 = await cacheImageData(a);
-  const image2 = await cacheImageData(b);
+  const image1 = await saveImageData(a);
+  const image2 = await saveImageData(b);
 
   const match = pixelmatch(
     image1.data,
@@ -36,6 +38,25 @@ const cacheImageData = async (image: string) => {
   const decoded = await decodeImage(image);
   const resized = resizeImageData(decoded, width, height);
   cache.set(image, resized);
+  return resized as Image;
+};
+
+const saveImageData = async (image: string) => {
+  const hash = crypto
+    .createHash("md5")
+    .update(image)
+    .digest("hex");
+
+  const pixelData = await readPixelData(hash);
+  if (pixelData) {
+    return { data: pixelData, width, height };
+  }
+
+  const decoded = await decodeImage(image);
+  const resized = resizeImageData(decoded, width, height);
+  await writePixelData(hash, resized.data);
+  store.indexed++;
+
   return resized as Image;
 };
 

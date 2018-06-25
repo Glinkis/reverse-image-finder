@@ -7,6 +7,7 @@ export const searchForFiles = () => {
     return;
   }
   store.searchedFiles = 0;
+  store.indexed = 0;
 
   walkDirectory(store.directory, (error, files) => {
     store.isSearching = false;
