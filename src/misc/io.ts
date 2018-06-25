@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { app } from "electron";
+import { app, remote } from "electron";
 import {
   readFileAsync,
   writeFileAsync,
@@ -9,7 +9,7 @@ import {
 } from "./promisified";
 
 const indexedDir = (function createIndexDirectory() {
-  const userDataDir = app.getPath("userData");
+  const userDataDir = (app || remote.app).getPath("userData");
   const dir = userDataDir + "/indexed/";
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   return dir;
