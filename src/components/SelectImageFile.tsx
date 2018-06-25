@@ -5,14 +5,13 @@ import { store } from "../misc/store";
 import { imageRow } from "./Images";
 
 export const SelectImageFile = () => (
-  <button id="select-image-file" onClick={openImage}>
-    Select Image
-  </button>
+  <button onClick={openImage}>Select Image</button>
 );
 
-export const SelectedImageFile = observer(
-  () => (store.image ? imageRow(store.image) : null)
-);
+export const SelectedImageFile = observer(() => {
+  if (!store.image) return null;
+  return imageRow(store.image);
+});
 
 const openImage = () => {
   store.image = remote.dialog.showOpenDialog({

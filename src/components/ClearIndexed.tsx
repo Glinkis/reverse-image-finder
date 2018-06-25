@@ -1,6 +1,6 @@
 import * as React from "react";
-import { emptyIndexedPixelData } from "../misc/io";
+import { clearPixelData } from "../misc/io";
 
 export const ClearIndexed = () => (
-  <button onClick={emptyIndexedPixelData}>Clear Indexed Files</button>
+  <button onClick={clearPixelData}>Clear Indexed Files</button>
 );

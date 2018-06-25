@@ -28,7 +28,7 @@ export const writePixelData = async (name: string, data: Uint8Array) => {
 const readdirAsync = util.promisify(fs.readdir);
 const unlinkAsync = util.promisify(fs.unlink);
 
-export const emptyIndexedPixelData = async () => {
+export const clearPixelData = async () => {
   const files = await readdirAsync(indexedDir);
   for (const file of files) {
     await unlinkAsync(path.join(indexedDir, file));
