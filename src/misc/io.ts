@@ -12,8 +12,10 @@ const indexedDir = (function createIndexDirectory() {
 const readFileAsync = util.promisify(fs.readFile);
 
 export const readPixelData = async (name: string) => {
-  const pixelData = await readFileAsync(indexedDir + name);
-  return pixelData as Uint8Array;
+  try {
+    const pixelData = await readFileAsync(indexedDir + name);
+    return pixelData as Uint8Array;
+  } catch {}
 };
 
 const writeFileAsync = util.promisify(fs.writeFile);
