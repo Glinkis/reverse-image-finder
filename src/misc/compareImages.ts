@@ -10,8 +10,8 @@ import { writePixelData, readPixelData } from "./io";
 export const compareImages = async (a: string, b: string) => {
   if (a === b) return true;
 
-  const image1 = await saveImageData(a);
-  const image2 = await saveImageData(b);
+  const image1 = await getImageData(a);
+  const image2 = await getImageData(b);
 
   const match = pixelmatch(
     image1.data,
@@ -30,23 +30,25 @@ export const compareImages = async (a: string, b: string) => {
 const width = 64;
 const height = 64;
 
-const saveImageData = async (image: string) => {
+const getImageData = async (image: string) => {
   const hash = crypto
     .createHash("md5")
     .update(image)
     .digest("hex");
 
-  const pixelData = await readPixelData(hash);
-  if (pixelData) {
-    return { data: pixelData, width, height };
+  const data = await readPixelData(hash);
+  if (data) {
+    return { data, width, height };
   }
+  return await indexImage(image, hash);
+};
 
+const indexImage = async (image: string, hash: string) => {
   const decoded = await decodeImage(image);
   const resized = resizeImageData(decoded, width, height);
   await writePixelData(hash, resized.data);
   store.indexed++;
-
-  return resized as Image;
+  return resized;
 };
 
 const decodeImage = async (image: string) => {
