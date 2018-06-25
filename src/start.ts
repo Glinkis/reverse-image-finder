@@ -1,9 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import { enableLiveReload } from "electron-compile";
 import { autoUpdater } from "electron-updater";
-import installExtension, {
-  REACT_DEVELOPER_TOOLS
-} from "electron-devtools-installer";
 import * as url from "url";
 import * as path from "path";
 
@@ -31,7 +28,6 @@ async function createWindow() {
   );
 
   if (isDevMode) {
-    await installExtension(REACT_DEVELOPER_TOOLS);
     win.webContents.openDevTools();
   }
 
