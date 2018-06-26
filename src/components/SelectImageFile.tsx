@@ -14,9 +14,12 @@ export const SelectedImageFile = observer(() => {
 });
 
 const openImage = () => {
+  const extensions = [...store.decoders.keys()].map(key =>
+    key.substring(1, key.length)
+  );
   store.image = remote.dialog.showOpenDialog({
     title: "Select Image",
-    filters: [{ name: "Image", extensions: [...store.decoders.keys()] }],
+    filters: [{ name: "Image", extensions }],
     properties: ["openFile"]
   })[0];
 };
