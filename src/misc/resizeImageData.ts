@@ -14,7 +14,7 @@ export function resizeImageData(
 ) {
   algorithm = algorithm || bilinearInterpolation;
 
-  const data = Buffer.allocUnsafe(width * height * 4);
+  const data = new Uint8Array(width * height * 4);
   const result = { width, height, data };
 
   algorithm(image, result);
