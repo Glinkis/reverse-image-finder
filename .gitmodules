@@ -1,3 +1,4 @@
 [submodule "psd.js"]
 	path = psd.js
-	url = https://github.com/meltingice/psd.js.git
+	url = https://github.com/Glinkis/psd.js.git
+	branch = patch-1
