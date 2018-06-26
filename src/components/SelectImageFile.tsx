@@ -8,7 +8,6 @@ import "../decoders/decoders";
 const extensions = [...store.decoders.keys()].map(key =>
   key.substring(1, key.length)
 );
-console.error("BAH", extensions);
 
 export const SelectImageFile = () => (
   <div>
