@@ -18,7 +18,5 @@ const decodeTif = async (image: string) => {
   return { data, width, height };
 };
 
-store.decoders.push(
-  { ext: "tif", decode: decodeTif },
-  { ext: "tiff", decode: decodeTif }
-);
+store.decoders.set(".tif", decodeTif);
+store.decoders.set(".tiff", decodeTif);

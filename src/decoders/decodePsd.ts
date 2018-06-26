@@ -14,4 +14,4 @@ const decodePsd = async (image: string) => {
   };
 };
 
-store.decoders.push({ ext: "psd", decode: decodePsd });
+store.decoders.set(".psd", decodePsd);

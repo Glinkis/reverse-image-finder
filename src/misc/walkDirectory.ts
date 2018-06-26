@@ -3,8 +3,6 @@ import * as path from "path";
 import { store } from "./store";
 import { readdirAsync, statAsync } from "./promisified";
 
-type Done = (error: Error | null, results?: string[]) => void;
-
 export const walkDirectory = async (dir: string) => {
   store.isSearching = true;
   let results: string[] = [];
@@ -38,8 +36,8 @@ export const walkDirectory = async (dir: string) => {
         return results;
       }
     } else {
-      for (const decoder of store.decoders) {
-        if (path.extname(file) === `.${decoder.ext}`) {
+        const ext = path.extname(file).toLowerCase();
+        if (store.decoders.has(ext)) {
           results.push(file);
         }
       }

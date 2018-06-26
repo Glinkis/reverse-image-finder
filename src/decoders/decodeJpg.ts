@@ -11,7 +11,5 @@ const decodeJpg = async (image: string) => {
   return { data, width, height };
 };
 
-store.decoders.push(
-  { ext: "jpg", decode: decodeJpg },
-  { ext: "jpeg", decode: decodeJpg }
-);
+store.decoders.set(".jpg", decodeJpg);
+store.decoders.set(".jpeg", decodeJpg);

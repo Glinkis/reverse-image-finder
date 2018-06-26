@@ -53,10 +53,9 @@ const indexImage = async (image: string, hash: string) => {
 
 const decodeImage = async (image: string) => {
   const ext = path.extname(image).toLowerCase();
-  for (const decoder of store.decoders) {
-    if (ext === `.${decoder.ext}`) {
-      return await decoder.decode(image);
-    }
+  const decode = store.decoders.get(ext);
+  if (decode) {
+    return await decode(image);
   }
-  throw new Error(`Invalid extension: ${ext}.`);
+  throw new Error(`${ext} is not a supported file type.`);
 };

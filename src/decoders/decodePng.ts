@@ -20,4 +20,4 @@ const decodePng = async (image: string) => {
   });
 };
 
-store.decoders.push({ ext: "png", decode: decodePng });
+store.decoders.set(".png", decodePng);
