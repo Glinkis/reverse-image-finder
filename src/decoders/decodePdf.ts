@@ -4,6 +4,9 @@ import { readFileAsync } from "../misc/promisified";
 const canvas = document.createElement("canvas");
 const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;
 
+/**
+ * {@link https://github.com/mozilla/pdf.js}
+ */
 const decodePdf = async (image: string) => {
   const document = await readFileAsync(image);
   const pdf = await PDFJS.getDocument(document);
