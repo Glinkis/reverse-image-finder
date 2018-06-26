@@ -12,7 +12,9 @@ const extensions = [...store.decoders.keys()].map(key =>
 export const SelectImageFile = () => (
   <div>
     <button onClick={openImage}>Select Image</button>
-    <div>Supported formats: {extensions.map(ext => <b> .{ext} </b>)}</div>
+    <div>
+      Supported formats: {extensions.map(ext => <b key={ext}> {`.${ext}`} </b>)}
+    </div>
   </div>
 );
 
