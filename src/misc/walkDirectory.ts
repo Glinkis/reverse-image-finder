@@ -1,9 +1,10 @@
-import * as fs from "fs";
 import * as path from "path";
 import { store } from "./store";
 import { readdirAsync, statAsync } from "./promisified";
 
-export const walkDirectory = async (dir: string) => {
+type FileFilter = (file: string) => boolean;
+
+export const walkDirectory = async (dir: string, filter?: FileFilter) => {
   store.isSearching = true;
   let results: string[] = [];
 
@@ -28,7 +29,7 @@ export const walkDirectory = async (dir: string) => {
     const stat = await statAsync(file).catch(console.error);
 
     if (stat && stat.isDirectory()) {
-      const result = await walkDirectory(file).catch(console.error);
+      const result = await walkDirectory(file, filter).catch(console.error);
       if (result) {
         results = results.concat(result);
       }
@@ -36,10 +37,10 @@ export const walkDirectory = async (dir: string) => {
         return results;
       }
     } else {
-      const ext = path.extname(file).toLowerCase();
-      if (store.decoders.has(ext)) {
-        results.push(file);
+      if (filter && !filter(file)) {
+        continue;
       }
+      results.push(file);
     }
     store.searchedFiles++;
     if (!--pending) {
