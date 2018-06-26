@@ -36,15 +36,14 @@ export const walkDirectory = async (dir: string) => {
         return results;
       }
     } else {
-        const ext = path.extname(file).toLowerCase();
-        if (store.decoders.has(ext)) {
-          results.push(file);
-        }
+      const ext = path.extname(file).toLowerCase();
+      if (store.decoders.has(ext)) {
+        results.push(file);
       }
-      store.searchedFiles++;
-      if (!--pending) {
-        return results;
-      }
+    }
+    store.searchedFiles++;
+    if (!--pending) {
+      return results;
     }
   }
 };
