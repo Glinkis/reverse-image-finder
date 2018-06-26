@@ -3,9 +3,18 @@ import { remote } from "electron";
 import { observer } from "mobx-react";
 import { store } from "../misc/store";
 import { imageRow } from "./Images";
+import "../decoders/decoders";
+
+const extensions = [...store.decoders.keys()].map(key =>
+  key.substring(1, key.length)
+);
+console.error("BAH", extensions);
 
 export const SelectImageFile = () => (
-  <button onClick={openImage}>Select Image</button>
+  <div>
+    <button onClick={openImage}>Select Image</button>
+    <div>Supported formats: {extensions.map(ext => <b> .{ext} </b>)}</div>
+  </div>
 );
 
 export const SelectedImageFile = observer(() => {
@@ -14,9 +23,6 @@ export const SelectedImageFile = observer(() => {
 });
 
 const openImage = () => {
-  const extensions = [...store.decoders.keys()].map(key =>
-    key.substring(1, key.length)
-  );
   store.image = remote.dialog.showOpenDialog({
     title: "Select Image",
     filters: [{ name: "Image", extensions }],
