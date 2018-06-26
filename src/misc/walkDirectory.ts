@@ -46,4 +46,5 @@ export const walkDirectory = async (dir: string) => {
       return results;
     }
   }
+  return results;
 };
