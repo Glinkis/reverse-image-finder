@@ -7,8 +7,7 @@ import { readFileAsync } from "../misc/promisified";
  */
 const decodeJpg = async (image: string) => {
   const encoded = await readFileAsync(image);
-  const { data, width, height } = jpeg.decode(encoded, true);
-  return { data, width, height };
+  return jpeg.decode(encoded, true);
 };
 
 store.decoders.set(".jpg", decodeJpg);
