@@ -6,8 +6,6 @@ import { store } from "../misc/store";
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore
 PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
-// @ts-ignore
-PDFJS.GlobalWorkerOptions.disableWorker = true;
 
 const canvas = document.createElement("canvas");
 const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;

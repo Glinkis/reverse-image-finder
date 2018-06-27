@@ -80,5 +80,9 @@ describe("compareImages", () => {
     it("returns true for identical AI to PNG", async () => {
       expect(await compareAssets("img3.ai", "img3.png")).to.be.true;
     });
+
+    it("returns true for identical SVG to PNG", async () => {
+      expect(await compareAssets("img3.svg", "img3.png")).to.be.true;
+    });
   });
 });
