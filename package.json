@@ -35,7 +35,8 @@
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-hot-loader": "4.3.3",
-    "utif": "2.0.0"
+    "utif": "2.0.0",
+    "webpack": "4.12.2"
   },
   "devDependencies": {
     "@types/chai": "4.1.4",
