@@ -7,19 +7,19 @@ const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore
 PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
 
-const canvas = document.createElement("canvas");
-const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;
-
 /**
  * {@link https://github.com/mozilla/pdf.js}
  */
 const decodePdf = async (image: string) => {
-  const document = await readFileAsync(image);
-  const pdf = await PDFJS.getDocument(document);
+  const doc = await readFileAsync(image);
+  const pdf = await PDFJS.getDocument(doc);
   const page = await pdf.getPage(1);
 
   const viewport = page.getViewport(1);
   const { width, height } = viewport;
+
+  const canvas = document.createElement("canvas");
+  const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   canvas.width = width;
   canvas.height = height;
