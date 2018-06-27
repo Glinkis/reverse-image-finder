@@ -66,6 +66,7 @@
   },
   "build": {
     "productName": "Reverse Image Finder",
+    "files": ["!test/*"],
     "publish": {
       "provider": "github",
       "owner": "Glinkis",
