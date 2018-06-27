@@ -68,5 +68,17 @@ describe("compareImages", () => {
     it("returns true for identical PNG to PSD", async () => {
       expect(await compareAssets("img0.png", "img0.psd")).to.be.true;
     });
+
+    it("returns true for identical TIF to PNG", async () => {
+      expect(await compareAssets("img2.tif", "img2.png")).to.be.true;
+    });
+
+    it("returns true for identical PDF to PNG", async () => {
+      expect(await compareAssets("img3.pdf", "img3.png")).to.be.true;
+    });
+
+    it("returns true for identical AI to PNG", async () => {
+      expect(await compareAssets("img3.ai", "img3.png")).to.be.true;
+    });
   });
 });
