@@ -8,7 +8,7 @@ import {
   unlinkAsync
 } from "./promisified";
 
-const indexedDir = (function createIndexDirectory() {
+const indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
   const dir = userDataDir + "/indexed/";
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
@@ -17,7 +17,7 @@ const indexedDir = (function createIndexDirectory() {
 
 export const readPixelData = async (name: string) => {
   try {
-    const pixelData = await readFileAsync(path.join(indexedDir, name));
+    const pixelData = await readFileAsync(path.join(indexedDir, name)).catch();
     return pixelData as Uint8Array;
   } catch {}
 };
