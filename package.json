@@ -1,6 +1,6 @@
 {
   "name": "reverse-image-finder",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A reverse image finder application.",
   "main": "src/start.ts",
   "scripts": {
