@@ -56,7 +56,7 @@ describe("compareImages", () => {
     });
   });
 
-  describe("compare identical JPG to PNG", () => {
+  describe("compare identical", () => {
     it("returns true for identical JPG to PNG", async () => {
       expect(await compareAssets("img0.jpg", "img0.png")).to.be.true;
     });
