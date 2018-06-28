@@ -19,11 +19,9 @@ export const searchForFiles = async () => {
     if (file === store.image) {
       continue;
     }
-    compareImages(store.image, file).then(isSimilar => {
-      if (isSimilar) {
-        store.images.push(file);
-      }
-    });
+    if (await compareImages(store.image, file)) {
+      store.images.push(file);
+    }
   }
 };
 
