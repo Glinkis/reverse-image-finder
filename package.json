@@ -32,7 +32,6 @@
     "electron-devtools-installer": "2.2.4",
     "electron-squirrel-startup": "1.0.0",
     "electron-updater": "2.23.0",
-    "jpeg-js": "0.3.4",
     "mobx": "5.0.3",
     "mobx-react": "5.2.3",
     "pdfjs-dist": "2.0.489",
@@ -48,8 +47,6 @@
   "devDependencies": {
     "@types/chai": "4.1.4",
     "@types/electron": "1.6.10",
-    "@types/jpeg-js": "0.3.0",
-    "@types/jsdom": "11.0.6",
     "@types/mocha": "5.2.3",
     "@types/pdfjs-dist": "0.1.2",
     "@types/pixelmatch": "4.0.0",

@@ -1,13 +1,11 @@
-import * as jpeg from "jpeg-js";
 import { store } from "../misc/store";
-import { readFileAsync } from "../misc/promisified";
+import { decodeWithCanvas } from "../misc/decodeWithCanvas";
 
 /**
  * {@link https://github.com/eugeneware/jpeg-js}
  */
-const decodeJpg = async (image: string) => {
-  const encoded = await readFileAsync(image);
-  return jpeg.decode(encoded, true);
+const decodeJpg = (image: string) => {
+  return decodeWithCanvas(image);
 };
 
 store.decoders.set(".jpg", decodeJpg);
