@@ -7,9 +7,7 @@ export const decodeWithCanvas = async (image: string) => {
     img.src = image;
   });
 
-  const { data, width, height } = readImageData(img);
-
-  return { data: new Uint8Array(data.buffer), width, height };
+  return readImageData(img);
 };
 
 const readImageData = (image: HTMLImageElement) => {

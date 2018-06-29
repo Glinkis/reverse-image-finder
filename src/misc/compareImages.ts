@@ -7,28 +7,21 @@ import { store } from "./store";
 import { resizeImageData, Image } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
 
+const width = 64;
+const height = 64;
+
 export const compareImages = async (a: string, b: string) => {
   if (a === b) return true;
 
   const image1 = await getImageData(a);
   const image2 = await getImageData(b);
 
-  const match = pixelmatch(
-    image1.data,
-    image2.data,
-    null,
-    image1.width,
-    image1.height,
-    {
-      threshold: store.threshold
-    }
-  );
+  const match = pixelmatch(image1, image2, null, width, height, {
+    threshold: store.threshold
+  });
 
-  return match / image1.data.length < store.threshold;
+  return match / image1.length < store.threshold;
 };
-
-const width = 64;
-const height = 64;
 
 const getImageData = async (image: string) => {
   const hash = crypto
@@ -36,19 +29,15 @@ const getImageData = async (image: string) => {
     .update(image)
     .digest("hex");
 
-  const data = await readPixelData(hash);
-  if (data) {
-    return { data, width, height };
-  }
-  return await indexImage(image, hash);
+  return (await readPixelData(hash)) || (await indexPixelData(image, hash));
 };
 
-const indexImage = async (image: string, hash: string) => {
+const indexPixelData = async (image: string, hash: string) => {
   const decoded = await decodeImage(image);
-  const resized = resizeImageData(decoded, width, height);
-  await writePixelData(hash, resized.data);
+  const pixelData = resizeImageData(decoded, width, height);
+  await writePixelData(hash, pixelData);
   store.indexed++;
-  return resized;
+  return pixelData;
 };
 
 const decodeImage = async (image: string) => {

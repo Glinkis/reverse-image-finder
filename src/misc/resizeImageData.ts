@@ -1,5 +1,5 @@
 export interface Image {
-  data: Buffer | Uint8Array;
+  data: Buffer | Uint8Array | Uint8ClampedArray;
   width: number;
   height: number;
 }
@@ -19,7 +19,7 @@ export function resizeImageData(
 
   algorithm(image, result);
 
-  return result;
+  return result.data;
 }
 
 export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {
