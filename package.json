@@ -31,7 +31,7 @@
     "rsvp": "~ 3.0.6",
     "electron-devtools-installer": "2.2.4",
     "electron-squirrel-startup": "1.0.0",
-    "electron-updater": "2.22.1",
+    "electron-updater": "2.23.0",
     "jpeg-js": "0.3.4",
     "mobx": "5.0.3",
     "mobx-react": "5.2.3",
@@ -43,7 +43,7 @@
     "react-dom": "16.4.1",
     "react-hot-loader": "4.3.3",
     "utif": "2.0.0",
-    "webpack": "4.12.2"
+    "webpack": "4.13.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.4",
@@ -54,10 +54,10 @@
     "@types/pdfjs-dist": "0.1.2",
     "@types/pixelmatch": "4.0.0",
     "@types/pngjs": "3.3.2",
-    "@types/react": "16.4.2",
+    "@types/react": "16.4.5",
     "@types/react-dom": "16.0.6",
     "chai": "4.1.2",
-    "electron-builder": "20.16.4",
+    "electron-builder": "20.18.0",
     "electron-mocha": "6.0.4",
     "electron-prebuilt-compile": "2.0.3",
     "mocha": "5.2.0",
@@ -66,7 +66,9 @@
   },
   "build": {
     "productName": "Reverse Image Finder",
-    "files": ["!test/*"],
+    "files": [
+      "!test/*"
+    ],
     "publish": {
       "provider": "github",
       "owner": "Glinkis",
