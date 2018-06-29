@@ -8,7 +8,8 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "publish": "electron-builder --publish always",
-    "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer"
+    "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer",
+    "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive"
   },
   "repository": {
     "type": "git",
