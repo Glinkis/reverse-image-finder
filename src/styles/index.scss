@@ -4,12 +4,11 @@ body {
   padding: 0;
   padding: $spacing;
   font-size: 10pt;
+  a {
+    display: block;
+  }
 }
 
 button {
   padding: 4pt;
-}
-
-a {
-  display: block;
 }
