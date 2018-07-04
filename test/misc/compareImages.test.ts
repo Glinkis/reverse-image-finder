@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { store } from "../../src/misc/store";
+import { store } from "../../src/store";
 import { compareImages } from "../../src/misc/compareImages";
 import * as path from "path";
 

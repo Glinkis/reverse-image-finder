@@ -1,20 +1,16 @@
 import * as React from "react";
 import { remote } from "electron";
 import { observer } from "mobx-react";
-import { store } from "../misc/store";
+import { store } from "../store";
 import { imageRow } from "./Images";
-import "../decoders/decoders";
-
-const extensions = [...store.decoders.keys()].map(key =>
-  key.substring(1, key.length)
-);
+import { extensions } from "../decoders/decodeImage";
 
 export const SelectImageFile = () => (
   <div>
     <button onClick={openImage}>Select Image</button>
-    <div>
-      Supported formats: {extensions.map(ext => <b key={ext}> {`.${ext}`} </b>)}
-    </div>
+    <br />
+    Supported formats:
+    {extensions.map(ext => <b key={ext}> {`.${ext}`} </b>)}
   </div>
 );
 

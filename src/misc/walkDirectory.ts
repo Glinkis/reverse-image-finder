@@ -1,5 +1,5 @@
 import * as path from "path";
-import { store } from "./store";
+import { store } from "../store";
 import { readdirAsync, statAsync } from "./promisified";
 
 type FileFilter = (file: string) => boolean;

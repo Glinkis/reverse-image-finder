@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as path from "path";
 import { observer } from "mobx-react";
-import { store } from "../misc/store";
+import { store } from "../store";
 import { shell } from "electron";
 
 export const Images = observer(() => <div>{store.images.map(imageRow)}</div>);

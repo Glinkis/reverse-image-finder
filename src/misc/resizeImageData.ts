@@ -1,8 +1,4 @@
-export interface Image {
-  data: Buffer | Uint8Array | Uint8ClampedArray;
-  width: number;
-  height: number;
-}
+import { Image } from "../store";
 
 export type ResizeAlgorithm = (src: Image, dst: Image) => void;
 

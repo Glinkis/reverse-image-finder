@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as PSD from "../../psd.js/index.js";
-import { store } from "../misc/store";
+import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
 
 /**

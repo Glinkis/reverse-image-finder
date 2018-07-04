@@ -1,4 +1,4 @@
-import { store } from "../misc/store";
+import { store } from "../store";
 import { decodeWithCanvas } from "../misc/decodeWithCanvas";
 
 const decodeJpg = (image: string) => decodeWithCanvas(image);

@@ -1,9 +1,14 @@
 import { observable } from "mobx";
-import { Image } from "./resizeImageData";
+
+export interface Image {
+  data: Buffer | Uint8Array | Uint8ClampedArray;
+  width: number;
+  height: number;
+}
 
 export type Decoder = (image: string) => Promise<Image>;
 
-export interface IStore {
+export interface Store {
   image: string | null;
   directory: string | null;
   isSearching: boolean;
@@ -20,7 +25,7 @@ export const store = observable({
   isSearching: false,
   images: [],
   decoders: new Map<string, Decoder>(),
-  threshold: 0.02,
+  threshold: 0.03,
   searchedFiles: 0,
   indexed: 0
-} as IStore);
+} as Store);

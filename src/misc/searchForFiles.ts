@@ -1,5 +1,5 @@
 import { walkDirectory } from "./walkDirectory";
-import { store } from "./store";
+import { store } from "../store";
 import { compareImages } from "./compareImages";
 import * as path from "path";
 

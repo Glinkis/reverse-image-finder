@@ -1,7 +1,7 @@
 import * as React from "react";
 import { remote } from "electron";
 import { observer } from "mobx-react";
-import { store } from "../misc/store";
+import { store } from "../store";
 
 export const SelectDirectory = () => (
   <button onClick={openDirectory}>Directory</button>

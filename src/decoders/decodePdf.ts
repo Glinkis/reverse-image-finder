@@ -1,7 +1,6 @@
 import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
-import { readFileAsync } from "../misc/promisified";
-import { store } from "../misc/store";
+import { store } from "../store";
 
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore

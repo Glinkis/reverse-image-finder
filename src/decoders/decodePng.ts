@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { PNG } from "pngjs";
 import { Image } from "../misc/resizeImageData";
-import { store } from "../misc/store";
+import { store } from "../store";
 
 /**
  * {@link https://github.com/lukeapage/pngjs}

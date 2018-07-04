@@ -1,5 +1,5 @@
 import * as React from "react";
-import { store } from "../misc/store";
+import { store } from "../store";
 import { searchForFiles } from "../misc/searchForFiles";
 
 export const StartSearch = () => (

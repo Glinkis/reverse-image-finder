@@ -1,11 +1,10 @@
 // @ts-ignoreimport { decodePng } from "./decodePng";
 import * as pixelmatch from "pixelmatch";
-import * as path from "path";
 import * as crypto from "crypto";
-import "../decoders/decoders";
-import { store } from "./store";
+import { store } from "../store";
 import { resizeImageData } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
+import { decodeImage } from "../decoders/decodeImage";
 
 const width = 64;
 const height = 64;
@@ -34,15 +33,6 @@ const indexPixelData = async (image: string, hash: string) => {
   await writePixelData(hash, pixelData);
   store.indexed++;
   return pixelData;
-};
-
-const decodeImage = async (image: string) => {
-  const ext = path.extname(image).toLowerCase();
-  const decode = store.decoders.get(ext);
-  if (decode) {
-    return await decode(image);
-  }
-  throw new Error(`${ext} is not a supported file type.`);
 };
 
 const hashImage = (image: string) =>

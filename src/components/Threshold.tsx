@@ -1,6 +1,6 @@
 import * as React from "react";
 import { observer } from "mobx-react";
-import { store } from "../misc/store";
+import { store } from "../store";
 
 export const Threshold = observer(() => {
   if (!store.directory || !store.image) return null;
