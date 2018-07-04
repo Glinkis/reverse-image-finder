@@ -7,6 +7,7 @@ import {
   readdirAsync,
   unlinkAsync
 } from "./promisified";
+import { PNG } from "pngjs";
 
 const indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
@@ -15,12 +16,23 @@ const indexedDir = (() => {
   return dir;
 })();
 
-export const readPixelData = async (name: string) => {
-  return readFileAsync(path.join(indexedDir, name)).catch(err => null);
+export const readPixelData = (name: string) => {
+  const stream = fs.createReadStream(path.join(indexedDir, name));
+  const png = new PNG();
+  return new Promise(resolve => {
+    stream
+      .on("error", () => resolve())
+      .pipe(png)
+      .on("error", () => resolve())
+      .on("parsed", () => resolve(png.data));
+  });
 };
 
-export const writePixelData = async (name: string, data: Uint8Array) => {
-  await writeFileAsync(path.join(indexedDir, name), data);
+export const writePixelData = (name: string, data: Uint8Array) => {
+  const png = new PNG({ width: 64, height: 64 });
+  png.data = data instanceof Buffer ? data : typedArrayToBuffer(data);
+  const stream = fs.createWriteStream(path.join(indexedDir, name));
+  png.pack().pipe(stream);
 };
 
 export const clearPixelData = async () => {
@@ -29,3 +41,13 @@ export const clearPixelData = async () => {
     await unlinkAsync(path.join(indexedDir, file));
   }
 };
+
+function typedArrayToBuffer(array: Uint8Array | Buffer) {
+  const buffer = Buffer.from(array.buffer as ArrayBuffer);
+  if (array.byteLength !== array.buffer.byteLength) {
+    buffer.set(
+      buffer.slice(array.byteOffset, array.byteOffset + array.byteLength)
+    );
+  }
+  return buffer;
+}
