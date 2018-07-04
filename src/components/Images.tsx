@@ -7,9 +7,7 @@ import { shell } from "electron";
 export const Images = observer(() => <div>{store.images.map(imageRow)}</div>);
 
 export const imageRow = (image: string, i?: number) => (
-  <div key={i}>
-    <a href="#" onClick={() => shell.showItemInFolder(image)}>
-      {path.basename(image)}
-    </a>
-  </div>
+  <a key={i} href="#" onClick={() => shell.showItemInFolder(image)}>
+    {path.basename(image)}
+  </a>
 );

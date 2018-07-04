@@ -11,7 +11,7 @@ export const Threshold = observer(() => {
 
   return (
     <div>
-      <div>Threshold: {store.threshold.toPrecision(2)}</div>
+      Threshold: {store.threshold.toPrecision(2)} <br />
       <input
         type="range"
         min="0"
