@@ -9,7 +9,7 @@ import { readFileAsync } from "../misc/promisified";
 const decodePsd = async (image: string) => {
   const data = await readFileAsync(image);
   const psd = new PSD(data);
-  psd.parse(data);
+  psd.parse();
   return {
     data: psd.image.pixelData,
     width: psd.image.width(),
