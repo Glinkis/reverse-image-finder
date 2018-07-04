@@ -4,7 +4,7 @@ import * as path from "path";
 import * as crypto from "crypto";
 import "../decoders/decoders";
 import { store } from "./store";
-import { resizeImageData, Image } from "./resizeImageData";
+import { resizeImageData } from "./resizeImageData";
 import { writePixelData, readPixelData } from "./io";
 
 const width = 64;
