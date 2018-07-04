@@ -12,7 +12,7 @@ if (isDevMode) {
 
 let win: BrowserWindow | null;
 
-async function createWindow() {
+const createWindow = () => {
   win = new BrowserWindow({
     width: isDevMode ? 1000 : 500,
     height: 500,
@@ -34,7 +34,7 @@ async function createWindow() {
   win.on("closed", () => {
     win = null;
   });
-}
+};
 
 app.on("ready", () => {
   createWindow();

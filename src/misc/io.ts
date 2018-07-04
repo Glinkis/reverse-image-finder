@@ -16,10 +16,7 @@ const indexedDir = (() => {
 })();
 
 export const readPixelData = async (name: string) => {
-  try {
-    const pixelData = await readFileAsync(path.join(indexedDir, name)).catch();
-    return pixelData as Uint8Array;
-  } catch {}
+  return readFileAsync(path.join(indexedDir, name)).catch(err => null);
 };
 
 export const writePixelData = async (name: string, data: Uint8Array) => {

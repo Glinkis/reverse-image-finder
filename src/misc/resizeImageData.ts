@@ -6,12 +6,12 @@ export interface Image {
 
 export type ResizeAlgorithm = (src: Image, dst: Image) => void;
 
-export function resizeImageData(
+export const resizeImageData = (
   image: Image,
   width: number,
   height: number,
   algorithm?: ResizeAlgorithm
-) {
+) => {
   algorithm = algorithm || bilinearInterpolation;
 
   const data = new Uint8Array(width * height * 4);
@@ -20,7 +20,7 @@ export function resizeImageData(
   algorithm(image, result);
 
   return result.data;
-}
+};
 
 export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {
   let pos = 0;
@@ -40,15 +40,15 @@ export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {
   }
 };
 
-//prettier-ignore
+// prettier-ignore
 export const bilinearInterpolation: ResizeAlgorithm = (src, dst) => {
   type n = number;
 
-  function interpolate(k: n, kMin: n, kMax: n, vMin: n, vMax: n) {
+  const interpolate = (k: n, kMin: n, kMax: n, vMin: n, vMax: n) => {
     return Math.round((k - kMin) * vMax + (kMax - k) * vMin);
   }
 
-  function interpolateHorizontal(offset: n, x: n, y: n, xMin: n, xMax: n) {
+  const interpolateHorizontal = (offset: n, x: n, y: n, xMin: n, xMax: n) => {
     const vMin = src.data[(y * src.width + xMin) * 4 + offset];
     if (xMin === xMax) {
       return vMin;
@@ -57,7 +57,7 @@ export const bilinearInterpolation: ResizeAlgorithm = (src, dst) => {
     return interpolate(x, xMin, xMax, vMin, vMax);
   }
 
-  function interpolateVertical(offset: n, x: n, xMin: n, xMax: n, y: n, yMin: n, yMax: n) {
+  const interpolateVertical = (offset: n, x: n, xMin: n, xMax: n, y: n, yMin: n, yMax: n) => {
     const vMin = interpolateHorizontal(offset, x, yMin, xMin, xMax);
     if (yMin === yMax) {
       return vMin;

@@ -24,11 +24,7 @@ export const compareImages = async (a: string, b: string) => {
 };
 
 const getImageData = async (image: string) => {
-  const hash = crypto
-    .createHash("md5")
-    .update(image)
-    .digest("hex");
-
+  const hash = hashImage(image);
   return (await readPixelData(hash)) || (await indexPixelData(image, hash));
 };
 
@@ -48,3 +44,9 @@ const decodeImage = async (image: string) => {
   }
   throw new Error(`${ext} is not a supported file type.`);
 };
+
+const hashImage = (image: string) =>
+  crypto
+    .createHash("md5")
+    .update(image)
+    .digest("hex");
