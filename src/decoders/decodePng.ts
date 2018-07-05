@@ -5,9 +5,9 @@ import { store, Image } from "../store";
 /**
  * {@link https://github.com/lukeapage/pngjs}
  */
-export const decodePng = async (image: string) =>
+export const decodePng = async (path: string) =>
   new Promise<Image>((resolve, reject) => {
-    const stream = fs.createReadStream(image);
+    const stream = fs.createReadStream(path);
     const png = new PNG();
     stream
       .pipe(png)
@@ -16,7 +16,8 @@ export const decodePng = async (image: string) =>
         resolve({
           data: png.data,
           width: png.width,
-          height: png.height
+          height: png.height,
+          path
         })
       );
   });

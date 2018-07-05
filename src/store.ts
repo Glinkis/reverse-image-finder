@@ -1,9 +1,10 @@
 import { observable } from "mobx";
 
 export interface Image {
-  data: Buffer | Uint8Array | Uint8ClampedArray;
+  data: Buffer;
   width: number;
   height: number;
+  path: string;
 }
 
 export type Decoder = (image: string) => Promise<Image>;

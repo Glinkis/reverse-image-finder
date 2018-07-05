@@ -1,13 +1,16 @@
-export const decodeWithCanvas = async (image: string) => {
+import { typedArrayToBuffer } from "./typedArrayToBuffer";
+
+export const decodeWithCanvas = async (path: string) => {
   const img = new Image();
 
   await new Promise((resolve, reject) => {
     img.onload = resolve;
     img.onerror = reject;
-    img.src = image;
+    img.src = path;
   });
 
-  return readImageData(img);
+  const { data, width, height } = readImageData(img);
+  return { data: typedArrayToBuffer(data), width, height, path };
 };
 
 export const readImageData = (image: HTMLImageElement) => {
