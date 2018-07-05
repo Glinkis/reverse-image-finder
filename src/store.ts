@@ -1,10 +1,17 @@
 import { observable } from "mobx";
 
-export interface ImageBuffer {
-  data: Buffer;
+export type TypedArray =
+  | Buffer
+  | Uint8Array
+  | Uint8ClampedArray
+  | Uint16Array
+  | Uint32Array;
+
+export type ImageBuffer = {
+  data: TypedArray;
   width: number;
   height: number;
-}
+};
 
 export type Decoder = (image: string) => Promise<ImageBuffer>;
 

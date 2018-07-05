@@ -16,8 +16,7 @@ const readImageData = (image: HTMLImageElement) => {
   const { width, height } = image;
   const context = create2dContext(width, height);
   context.drawImage(image, 0, 0, width, height);
-  const { data } = context.getImageData(0, 0, width, height);
-  return { data: typedArrayToBuffer(data), width, height };
+  return context.getImageData(0, 0, width, height);
 };
 
 export const create2dContext = (width: number, height: number) => {

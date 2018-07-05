@@ -2,7 +2,6 @@
 import * as pixelmatch from "pixelmatch";
 import * as crypto from "crypto";
 import { store } from "../store";
-import { resizeImageData } from "./resizeImageData";
 import { writeIndexedImage, readIndexedImage } from "./io";
 import { decodeImage } from "../decoders/decodeImage";
 
@@ -28,15 +27,14 @@ export const compareImages = async (a: string, b: string) => {
 
 const getImage = async (path: string) => {
   const hash = hashImage(path);
-  return (await readIndexedImage(hash)) || (await indexPixelData(path, hash));
-};
+  const image = await readIndexedImage(hash);
 
-const indexPixelData = async (path: string, hash: string) => {
-  const decoded = await decodeImage(path);
-  const resized = resizeImageData(decoded, 64, 64);
-  await writeIndexedImage(hash, resized);
-  store.indexed++;
-  return resized;
+  if (image) {
+    return image;
+  } else {
+    const decoded = await decodeImage(path);
+    return await writeIndexedImage(hash, decoded);
+  }
 };
 
 const hashImage = (path: string) =>

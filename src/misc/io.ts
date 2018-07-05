@@ -4,7 +4,8 @@ import { app, remote } from "electron";
 import { readdirAsync, unlinkAsync } from "./promisified";
 import { PNG } from "pngjs";
 import { decodePng } from "../decoders/decodePng";
-import { ImageBuffer } from "../store";
+import { ImageBuffer, store } from "../store";
+import { resizeImageData } from "./resizeImageData";
 
 const indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
@@ -22,9 +23,14 @@ export const readIndexedImage = (name: string) => {
 
 export const writeIndexedImage = (name: string, image: ImageBuffer) => {
   const file = path.join(indexedDir, name);
-  const png = new PNG({ width: image.width, height: image.height });
-  png.data = image.data;
-  png.pack().pipe(fs.createWriteStream(file));
+  const resized = resizeImageData(image, 64, 64);
+
+  Object.assign(new PNG(), resized)
+    .pack()
+    .pipe(fs.createWriteStream(file))
+    .on("close", () => store.indexed++);
+
+  return resized;
 };
 
 export const clearIndexedImages = async () => {

@@ -1,6 +1,6 @@
 import { ImageBuffer } from "../store";
 
-export type ResizeAlgorithm = (src: ImageBuffer, dst: ImageBuffer) => void;
+type ResizeAlgorithm = (src: ImageBuffer, dst: ImageBuffer) => void;
 
 export const resizeImageData = (
   image: ImageBuffer,
