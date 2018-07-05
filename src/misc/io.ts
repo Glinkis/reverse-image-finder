@@ -3,6 +3,7 @@ import * as path from "path";
 import { app, remote } from "electron";
 import { readdirAsync, unlinkAsync } from "./promisified";
 import { PNG } from "pngjs";
+import { decodePng } from "../decoders/decodePng";
 
 const indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
@@ -11,16 +12,11 @@ const indexedDir = (() => {
   return dir;
 })();
 
-export const readPixelData = (name: string) => {
-  const stream = fs.createReadStream(path.join(indexedDir, name));
-  const png = new PNG();
-  return new Promise<Buffer>(resolve => {
-    stream
-      .on("error", () => resolve())
-      .pipe(png)
-      .on("error", () => resolve())
-      .on("parsed", () => resolve(png.data));
-  });
+export const readPixelData = async (name: string) => {
+  try {
+    const { data } = await decodePng(path.join(indexedDir, name));
+    return data as Buffer;
+  } catch {}
 };
 
 export const writePixelData = (name: string, data: Buffer) => {

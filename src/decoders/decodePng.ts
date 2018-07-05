@@ -5,18 +5,21 @@ import { store, Image } from "../store";
 /**
  * {@link https://github.com/lukeapage/pngjs}
  */
-const decodePng = async (image: string) => {
-  return new Promise<Image>(resolve => {
-    fs.createReadStream(image)
-      .pipe(new PNG())
-      .on("parsed", function(this: PNG) {
+export const decodePng = async (image: string) =>
+  new Promise<Image>((resolve, reject) => {
+    const stream = fs.createReadStream(image);
+    const png = new PNG();
+    stream
+      .on("error", reject)
+      .pipe(png)
+      .on("error", reject)
+      .on("parsed", () => {
         resolve({
-          data: this.data,
-          width: this.width,
-          height: this.height
+          data: png.data,
+          width: png.width,
+          height: png.height
         });
       });
   });
-};
 
 store.decoders.set(".png", decodePng);
