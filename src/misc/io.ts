@@ -1,12 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { app, remote } from "electron";
-import {
-  readFileAsync,
-  writeFileAsync,
-  readdirAsync,
-  unlinkAsync
-} from "./promisified";
+import { readdirAsync, unlinkAsync } from "./promisified";
 import { PNG } from "pngjs";
 
 const indexedDir = (() => {
