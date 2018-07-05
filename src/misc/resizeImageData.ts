@@ -10,7 +10,7 @@ export const resizeImageData = (
 ) => {
   algorithm = algorithm || bilinearInterpolation;
 
-  const data = new Uint8Array(width * height * 4);
+  const data = new Buffer(width * height * 4);
   const result = { width, height, data };
 
   algorithm(image, result);

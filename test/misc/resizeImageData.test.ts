@@ -7,7 +7,7 @@ import {
 
 describe("resizeImageData", () => {
   // prettier-ignore
-  const pixels = new Uint8Array([
+  const pixels = new Buffer([
     255, 0, 0, 0,/**/ 0, 255, 0, 0,
     /*****************************/
     0, 0, 255, 0,/**/ 0, 0, 0, 255
@@ -16,7 +16,7 @@ describe("resizeImageData", () => {
 
   it("resizes with bilinearInterpolation", () => {
     // prettier-ignore
-    const pixels = new Uint8Array([
+    const pixels = new Buffer([
       255, 0, 0, 0,  /**/ 128, 128, 0, 0,/**/ 0, 255, 0, 0,  /**/ 0, 255, 0, 0,
       /*************************************************************************/      
       128, 0, 128, 0,/**/ 64, 64, 64, 64,/**/ 0, 128, 0, 128,/**/ 0, 128, 0, 128,
@@ -31,7 +31,7 @@ describe("resizeImageData", () => {
 
   it("resizes with nearestNeighbour", () => {
     // prettier-ignore
-    const pixels = new Uint8Array([
+    const pixels = new Buffer([
       255, 0, 0, 0,/**/ 255, 0, 0, 0,/**/ 0, 255, 0, 0,/**/ 0, 255, 0, 0,
       /*****************************************************************/
       255, 0, 0, 0,/**/ 255, 0, 0, 0,/**/ 0, 255, 0, 0,/**/ 0, 255, 0, 0,

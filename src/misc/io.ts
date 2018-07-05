@@ -19,7 +19,7 @@ const indexedDir = (() => {
 export const readPixelData = (name: string) => {
   const stream = fs.createReadStream(path.join(indexedDir, name));
   const png = new PNG();
-  return new Promise(resolve => {
+  return new Promise<Buffer>(resolve => {
     stream
       .on("error", () => resolve())
       .pipe(png)
@@ -28,7 +28,7 @@ export const readPixelData = (name: string) => {
   });
 };
 
-export const writePixelData = (name: string, data: Uint8Array) => {
+export const writePixelData = (name: string, data: Buffer) => {
   const png = new PNG({ width: 64, height: 64 });
   png.data = data instanceof Buffer ? data : typedArrayToBuffer(data);
   const stream = fs.createWriteStream(path.join(indexedDir, name));
@@ -43,6 +43,9 @@ export const clearPixelData = async () => {
 };
 
 function typedArrayToBuffer(array: Uint8Array | Buffer) {
+  if (array instanceof Buffer) {
+    return array;
+  }
   const buffer = Buffer.from(array.buffer as ArrayBuffer);
   if (array.byteLength !== array.buffer.byteLength) {
     buffer.set(
