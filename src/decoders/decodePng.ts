@@ -10,16 +10,15 @@ export const decodePng = async (image: string) =>
     const stream = fs.createReadStream(image);
     const png = new PNG();
     stream
-      .on("error", reject)
       .pipe(png)
       .on("error", reject)
-      .on("parsed", () => {
+      .on("parsed", () =>
         resolve({
           data: png.data,
           width: png.width,
           height: png.height
-        });
-      });
+        })
+      );
   });
 
 store.decoders.set(".png", decodePng);

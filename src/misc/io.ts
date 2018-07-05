@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { app, remote } from "electron";
-import { readdirAsync, unlinkAsync } from "./promisified";
+import { readdirAsync, unlinkAsync, existsAsync } from "./promisified";
 import { PNG } from "pngjs";
 import { decodePng } from "../decoders/decodePng";
 
@@ -13,27 +13,27 @@ const indexedDir = (() => {
 })();
 
 export const readPixelData = async (name: string) => {
-  try {
-    const { data } = await decodePng(path.join(indexedDir, name));
-    return data as Buffer;
-  } catch {}
+  const file = path.join(indexedDir, name);
+  if (fs.existsSync(file)) {
+    const imageData = await decodePng(file);
+    return imageData.data as Buffer;
+  }
 };
 
 export const writePixelData = (name: string, data: Buffer) => {
+  const file = path.join(indexedDir, name);
   const png = new PNG({ width: 64, height: 64 });
-  png.data = data instanceof Buffer ? data : typedArrayToBuffer(data);
-  const stream = fs.createWriteStream(path.join(indexedDir, name));
-  png.pack().pipe(stream);
+  png.data = typedArrayToBuffer(data);
+  png.pack().pipe(fs.createWriteStream(file));
 };
 
 export const clearPixelData = async () => {
-  const files = await readdirAsync(indexedDir);
-  for (const file of files) {
+  for (const file of await readdirAsync(indexedDir)) {
     await unlinkAsync(path.join(indexedDir, file));
   }
 };
 
-function typedArrayToBuffer(array: Uint8Array | Buffer) {
+const typedArrayToBuffer = (array: Buffer | Uint8Array) => {
   if (array instanceof Buffer) {
     return array;
   }
@@ -44,4 +44,4 @@ function typedArrayToBuffer(array: Uint8Array | Buffer) {
     );
   }
   return buffer;
-}
+};
