@@ -1,5 +1,3 @@
-import { typedArrayToBuffer } from "./typedArrayToBuffer";
-
 export const decodeWithCanvas = async (path: string) => {
   const img = new Image();
 
