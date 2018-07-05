@@ -10,14 +10,14 @@ export const decodeWithCanvas = async (image: string) => {
   return readImageData(img);
 };
 
-const readImageData = (image: HTMLImageElement) => {
+export const readImageData = (image: HTMLImageElement) => {
   const { width, height } = image;
   const context = create2dContext(width, height);
   context.drawImage(image, 0, 0, width, height);
   return context.getImageData(0, 0, width, height);
 };
 
-const create2dContext = (width: number, height: number) => {
+export const create2dContext = (width: number, height: number) => {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
