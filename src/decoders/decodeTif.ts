@@ -14,7 +14,7 @@ const decodeTif = async (path: string) => {
 
   const { width, height } = ifds[0];
   const data = Utif.toRGBA8(ifds[0]);
-  return { data, width, height, path };
+  return { data, width, height };
 };
 
 store.decoders.set(".tif", decodeTif);

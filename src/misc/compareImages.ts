@@ -3,40 +3,44 @@ import * as pixelmatch from "pixelmatch";
 import * as crypto from "crypto";
 import { store } from "../store";
 import { resizeImageData } from "./resizeImageData";
-import { writePixelData, readPixelData } from "./io";
+import { writeIndexedImage, readIndexedImage } from "./io";
 import { decodeImage } from "../decoders/decodeImage";
-
-const width = 64;
-const height = 64;
 
 export const compareImages = async (a: string, b: string) => {
   if (a === b) return true;
 
-  const image1 = await getImageData(a);
-  const image2 = await getImageData(b);
+  const image1 = await getImage(a);
+  const image2 = await getImage(b);
 
-  const match = pixelmatch(image1, image2, null, width, height, {
-    threshold: store.threshold
-  });
+  const match = pixelmatch(
+    image1.data,
+    image2.data,
+    null,
+    image1.width,
+    image1.height,
+    {
+      threshold: store.threshold
+    }
+  );
 
-  return match / image1.length < store.threshold;
+  return match / image1.data.length < store.threshold;
 };
 
-const getImageData = async (image: string) => {
-  const hash = hashImage(image);
-  return (await readPixelData(hash)) || (await indexPixelData(image, hash));
+const getImage = async (path: string) => {
+  const hash = hashImage(path);
+  return (await readIndexedImage(hash)) || (await indexPixelData(path, hash));
 };
 
-const indexPixelData = async (image: string, hash: string) => {
-  const decoded = await decodeImage(image);
-  const pixelData = resizeImageData(decoded, width, height);
-  await writePixelData(hash, pixelData);
+const indexPixelData = async (path: string, hash: string) => {
+  const decoded = await decodeImage(path);
+  const resized = resizeImageData(decoded, 64, 64);
+  await writeIndexedImage(hash, resized);
   store.indexed++;
-  return pixelData;
+  return resized;
 };
 
-const hashImage = (image: string) =>
+const hashImage = (path: string) =>
   crypto
     .createHash("md5")
-    .update(image)
+    .update(path)
     .digest("hex");

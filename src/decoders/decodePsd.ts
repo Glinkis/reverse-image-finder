@@ -11,12 +11,10 @@ const decodePsd = async (path: string) => {
   const data = await readFileAsync(path);
   const psd = new PSD(data);
   psd.parse();
-  console.log(psd.image);
   return {
     data: typedArrayToBuffer(psd.image.pixelData),
     width: psd.image.width(),
-    height: psd.image.height(),
-    path
+    height: psd.image.height()
   };
 };
 

@@ -22,7 +22,7 @@ const decodePdf = async (path: string) => {
   await page.render({ canvasContext, viewport });
 
   const { data } = canvasContext.getImageData(0, 0, width, height);
-  return { data: typedArrayToBuffer(data), width, height, path };
+  return { data: typedArrayToBuffer(data), width, height };
 };
 
 store.decoders.set(".pdf", decodePdf);

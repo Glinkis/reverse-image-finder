@@ -25,8 +25,8 @@ describe("resizeImageData", () => {
       /*************************************************************************/
       0, 0, 255, 0,  /**/ 0, 0, 128, 128,/**/ 0, 0, 0, 255,  /**/ 0, 0, 0, 255,
     ]);
-    const data = resizeImageData(image, 4, 4, bilinearInterpolation);
-    expect(data).to.deep.equal(pixels);
+    const resized = resizeImageData(image, 4, 4, bilinearInterpolation);
+    expect(resized.data).to.deep.equal(pixels);
   });
 
   it("resizes with nearestNeighbour", () => {
@@ -40,7 +40,7 @@ describe("resizeImageData", () => {
       /*****************************************************************/
       0, 0, 255, 0,/**/ 0, 0, 255, 0,/**/ 0, 0, 0, 255,/**/ 0, 0, 0, 255,
     ]);
-    const data = resizeImageData(image, 4, 4, nearestNeighbor);
-    expect(data).to.deep.equal(pixels);
+    const resized = resizeImageData(image, 4, 4, nearestNeighbor);
+    expect(resized.data).to.deep.equal(pixels);
   });
 });

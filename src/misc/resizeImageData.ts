@@ -1,9 +1,9 @@
-import { Image } from "../store";
+import { ImageBuffer } from "../store";
 
-export type ResizeAlgorithm = (src: Image, dst: Image) => void;
+export type ResizeAlgorithm = (src: ImageBuffer, dst: ImageBuffer) => void;
 
 export const resizeImageData = (
-  image: Image,
+  image: ImageBuffer,
   width: number,
   height: number,
   algorithm?: ResizeAlgorithm
@@ -15,7 +15,7 @@ export const resizeImageData = (
 
   algorithm(image, result);
 
-  return result.data;
+  return result;
 };
 
 export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {

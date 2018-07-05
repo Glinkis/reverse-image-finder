@@ -1,13 +1,12 @@
 import { observable } from "mobx";
 
-export interface Image {
+export interface ImageBuffer {
   data: Buffer;
   width: number;
   height: number;
-  path: string;
 }
 
-export type Decoder = (image: string) => Promise<Image>;
+export type Decoder = (image: string) => Promise<ImageBuffer>;
 
 export interface Store {
   image: string | null;
