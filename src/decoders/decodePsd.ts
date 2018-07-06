@@ -6,9 +6,9 @@ import { readFileAsync } from "../misc/promisified";
 /**
  * {@link https://github.com/meltingice/psd.js}
  */
-const decodePsd = async (path: string) => {
-  const data = await readFileAsync(path);
-  const psd = new PSD(data);
+const decodePsd = async (imagePath: string) => {
+  const fileBuffer = await readFileAsync(imagePath);
+  const psd = new PSD(fileBuffer);
   psd.parse();
   return {
     data: psd.image.pixelData,

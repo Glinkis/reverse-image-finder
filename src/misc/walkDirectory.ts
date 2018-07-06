@@ -15,6 +15,7 @@ export const walkDirectory = async (dir: string, filter?: FileFilter) => {
   }
 
   let pending = list.length;
+
   if (!pending) {
     return results;
   }
@@ -30,22 +31,28 @@ export const walkDirectory = async (dir: string, filter?: FileFilter) => {
 
     if (stat && stat.isDirectory()) {
       const result = await walkDirectory(file, filter).catch(console.error);
+
       if (result) {
         results = results.concat(result);
       }
+
       if (!--pending) {
         return results;
       }
     } else {
-      if (filter && !filter(file)) {
+      if (filter && !filter(file)) 
         continue;
       }
+
       results.push(file);
     }
+
     store.searchedFiles++;
+
     if (!--pending) {
       return results;
     }
   }
+
   return results;
 };

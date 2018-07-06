@@ -7,18 +7,22 @@ export const searchForFiles = async () => {
   if (!store.directory) {
     return;
   }
+
   store.searchedFiles = 0;
   store.indexed = 0;
 
   const files = await walkDirectory(store.directory, checkFileSupport);
   store.isSearching = false;
+
   if (!files || !store.image) {
     return;
   }
+
   for (const file of files) {
     if (file === store.image) {
       continue;
     }
+
     if (await compareImages(store.image, file)) {
       store.images.push(file);
     }

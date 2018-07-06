@@ -9,13 +9,18 @@ import { resizeImageData } from "./resizeImageData";
 
 const indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
-  const dir = userDataDir + "/indexed/";
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  const dir = path.join(userDataDir, "indexed");
+
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
   return dir;
 })();
 
 export const readIndexedImage = (name: string) => {
   const file = path.join(indexedDir, name);
+
   if (fs.existsSync(file)) {
     return decodePng(file);
   }

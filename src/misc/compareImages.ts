@@ -5,11 +5,11 @@ import { store } from "../store";
 import { writeIndexedImage, readIndexedImage } from "./io";
 import { decodeImage } from "../decoders/decodeImage";
 
-export const compareImages = async (a: string, b: string) => {
-  if (a === b) return true;
+export const compareImages = async (path1: string, path2: string) => {
+  if (path1 === path2) return true;
 
-  const image1 = await getImage(a);
-  const image2 = await getImage(b);
+  const image1 = await getImage(path1);
+  const image2 = await getImage(path2);
 
   const match = pixelmatch(
     image1.data,
@@ -25,20 +25,20 @@ export const compareImages = async (a: string, b: string) => {
   return match / image1.data.length < store.threshold;
 };
 
-const getImage = async (path: string) => {
-  const hash = hashImage(path);
-  const image = await readIndexedImage(hash);
+const getImage = async (imagePath: string) => {
+  const hash = hashFilePath(imagePath);
+  const indexedImage = await readIndexedImage(hash);
 
-  if (image) {
-    return image;
-  } else {
-    const decoded = await decodeImage(path);
-    return await writeIndexedImage(hash, decoded);
+  if (indexedImage) {
+    return indexedImage;
   }
+
+  const decodedImage = await decodeImage(imagePath);
+  return await writeIndexedImage(hash, decodedImage);
 };
 
-const hashImage = (path: string) =>
+const hashFilePath = (filePath: string) =>
   crypto
     .createHash("md5")
-    .update(path)
+    .update(filePath)
     .digest("hex");

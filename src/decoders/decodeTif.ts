@@ -6,15 +6,17 @@ import { readFileAsync } from "../misc/promisified";
 /**
  * {@link https://github.com/photopea/UTIF.js}
  */
-const decodeTif = async (path: string) => {
-  const buffer = await readFileAsync(path);
-  const ifds = new Utif.decode(buffer);
+const decodeTif = async (imagePath: string) => {
+  const fileBuffer = await readFileAsync(imagePath);
+  const ifds = new Utif.decode(fileBuffer);
 
-  Utif.decodeImages(buffer, ifds);
+  Utif.decodeImages(fileBuffer, ifds);
 
-  const { width, height } = ifds[0];
-  const data = Utif.toRGBA8(ifds[0]);
-  return { data, width, height };
+  return {
+    data: Utif.toRGBA8(ifds[0]),
+    width: ifds[0].width,
+    height: ifds[0].height
+  };
 };
 
 store.decoders.set(".tif", decodeTif);

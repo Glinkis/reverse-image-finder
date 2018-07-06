@@ -7,12 +7,14 @@ import "./decodeTif";
 import "./decodePdf";
 import "./decodeSvg";
 
-export const decodeImage = async (image: string) => {
-  const ext = path.extname(image).toLowerCase();
+export const decodeImage = (imagePath: string) => {
+  const ext = path.extname(imagePath).toLowerCase();
   const decode = store.decoders.get(ext);
+
   if (decode) {
-    return await decode(image);
+    return decode(imagePath);
   }
+
   throw new Error(`${ext} is not a supported file type.`);
 };
 

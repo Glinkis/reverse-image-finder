@@ -36,6 +36,7 @@ export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {
   }
 };
 
+// TODO: Refactor
 // prettier-ignore
 export const bilinearInterpolation: ResizeAlgorithm = (src, dst) => {
   type n = number;

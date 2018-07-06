@@ -5,8 +5,8 @@ import { store, ImageBuffer } from "../store";
 /**
  * {@link https://github.com/lukeapage/pngjs}
  */
-export const decodePng = async (path: string) => {
-  const stream = fs.createReadStream(path);
+export const decodePng = async (imagePath: string) => {
+  const stream = fs.createReadStream(imagePath);
   const png = new PNG();
 
   // prettier-ignore

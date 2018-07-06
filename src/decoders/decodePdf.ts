@@ -10,8 +10,8 @@ PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dis
 /**
  * {@link https://github.com/mozilla/pdf.js}
  */
-const decodePdf = async (path: string) => {
-  const pdf = await PDFJS.getDocument(path);
+const decodePdf = async (imagePath: string) => {
+  const pdf = await PDFJS.getDocument(imagePath);
   const page = await pdf.getPage(1);
 
   const viewport = page.getViewport(1);

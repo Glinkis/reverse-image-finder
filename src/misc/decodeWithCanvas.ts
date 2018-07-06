@@ -11,10 +11,9 @@ export const decodeWithCanvas = async (path: string) => {
 };
 
 const readImageData = (image: HTMLImageElement) => {
-  const { width, height } = image;
-  const context = create2dContext(width, height);
-  context.drawImage(image, 0, 0, width, height);
-  return context.getImageData(0, 0, width, height);
+  const ctx = create2dContext(image.width, image.height);
+  ctx.drawImage(image, 0, 0, image.width, image.height);
+  return ctx.getImageData(0, 0, image.width, image.height);
 };
 
 export const create2dContext = (width: number, height: number) => {
