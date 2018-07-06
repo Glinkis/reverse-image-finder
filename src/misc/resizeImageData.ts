@@ -36,32 +36,35 @@ export const nearestNeighbor: ResizeAlgorithm = (src, dst) => {
   }
 };
 
-// TODO: Refactor
-// prettier-ignore
 export const bilinearInterpolation: ResizeAlgorithm = (src, dst) => {
-  type n = number;
+  let xMin: number;
+  let yMin: number;
 
-  const interpolate = (k: n, kMin: n, kMax: n, vMin: n, vMax: n) => {
+  let xMax: number;
+  let yMax: number;
+
+  // prettier-ignore
+  const interpolate = (k: number, kMin: number, kMax: number, vMin: number, vMax: number) => {
     return Math.round((k - kMin) * vMax + (kMax - k) * vMin);
   }
 
-  const interpolateHorizontal = (offset: n, x: n, y: n, xMin: n, xMax: n) => {
+  const interpolateHorizontal = (offset: number, x: number, y: number) => {
     const vMin = src.data[(y * src.width + xMin) * 4 + offset];
     if (xMin === xMax) {
       return vMin;
     }
     const vMax = src.data[(y * src.width + xMax) * 4 + offset];
     return interpolate(x, xMin, xMax, vMin, vMax);
-  }
+  };
 
-  const interpolateVertical = (offset: n, x: n, xMin: n, xMax: n, y: n, yMin: n, yMax: n) => {
-    const vMin = interpolateHorizontal(offset, x, yMin, xMin, xMax);
+  const interpolateVertical = (offset: number, x: number, y: number) => {
+    const vMin = interpolateHorizontal(offset, x, yMin);
     if (yMin === yMax) {
       return vMin;
     }
-    const vMax = interpolateHorizontal(offset, x, yMax, xMin, xMax);
+    const vMax = interpolateHorizontal(offset, x, yMax);
     return interpolate(y, yMin, yMax, vMin, vMax);
-  }
+  };
 
   let pos = 0;
 
@@ -70,16 +73,16 @@ export const bilinearInterpolation: ResizeAlgorithm = (src, dst) => {
       const srcX = (x * src.width) / dst.width;
       const srcY = (y * src.height) / dst.height;
 
-      const xMin = Math.floor(srcX);
-      const yMin = Math.floor(srcY);
+      xMin = Math.floor(srcX);
+      yMin = Math.floor(srcY);
 
-      const xMax = Math.min(Math.ceil(srcX), src.width - 1);
-      const yMax = Math.min(Math.ceil(srcY), src.height - 1);
+      xMax = Math.min(Math.ceil(srcX), src.width - 1);
+      yMax = Math.min(Math.ceil(srcY), src.height - 1);
 
-      dst.data[pos++] = interpolateVertical(0, srcX, xMin, xMax, srcY, yMin, yMax) // R
-      dst.data[pos++] = interpolateVertical(1, srcX, xMin, xMax, srcY, yMin, yMax) // G
-      dst.data[pos++] = interpolateVertical(2, srcX, xMin, xMax, srcY, yMin, yMax) // B
-      dst.data[pos++] = interpolateVertical(3, srcX, xMin, xMax, srcY, yMin, yMax) // A
+      dst.data[pos++] = interpolateVertical(0, srcX, srcY); // R
+      dst.data[pos++] = interpolateVertical(1, srcX, srcY); // G
+      dst.data[pos++] = interpolateVertical(2, srcX, srcY); // B
+      dst.data[pos++] = interpolateVertical(3, srcX, srcY); // A
     }
   }
-}
+};

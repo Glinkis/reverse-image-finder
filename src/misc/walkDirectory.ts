@@ -40,7 +40,7 @@ export const walkDirectory = async (dir: string, filter?: FileFilter) => {
         return results;
       }
     } else {
-      if (filter && !filter(file)) 
+      if (filter && !filter(file)) {
         continue;
       }
 
