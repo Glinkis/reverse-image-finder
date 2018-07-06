@@ -6,6 +6,7 @@ import { Images } from "./Images";
 import { Threshold } from "./Threshold";
 import { ClearIndexed } from "./ClearIndexed";
 import { SearchStats } from "./SearchStats";
+import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
 
 export const App = () => (
   <div id="app">
@@ -13,6 +14,7 @@ export const App = () => (
     <SelectedImageFile />
     <SelectDirectory />
     <SelectedDirectory />
+    <OpenIndexedDirectory />
     <ClearIndexed />
     <Threshold />
     <Search />

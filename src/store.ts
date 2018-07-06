@@ -24,6 +24,7 @@ export interface Store {
   threshold: number;
   searchedFiles: number;
   indexed: number;
+  indexedDir: string;
 }
 
 export const store = observable({
@@ -34,5 +35,6 @@ export const store = observable({
   decoders: new Map<string, Decoder>(),
   threshold: 0.03,
   searchedFiles: 0,
-  indexed: 0
+  indexed: 0,
+  indexedDir: ""
 } as Store);

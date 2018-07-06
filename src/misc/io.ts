@@ -7,7 +7,7 @@ import { decodePng } from "../decoders/decodePng";
 import { ImageBuffer, store } from "../store";
 import { resizeImageData } from "./resizeImageData";
 
-const indexedDir = (() => {
+store.indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
   const dir = path.join(userDataDir, "indexed");
 
@@ -19,7 +19,7 @@ const indexedDir = (() => {
 })();
 
 export const readIndexedImage = (name: string) => {
-  const file = path.join(indexedDir, name);
+  const file = path.join(store.indexedDir, name);
 
   if (fs.existsSync(file)) {
     return decodePng(file);
@@ -27,7 +27,7 @@ export const readIndexedImage = (name: string) => {
 };
 
 export const writeIndexedImage = (name: string, image: ImageBuffer) => {
-  const file = path.join(indexedDir, name);
+  const file = path.join(store.indexedDir, name);
   const resized = resizeImageData(image, 64, 64);
 
   Object.assign(new PNG(), resized)
@@ -39,7 +39,7 @@ export const writeIndexedImage = (name: string, image: ImageBuffer) => {
 };
 
 export const clearIndexedImages = async () => {
-  for (const file of await readdirAsync(indexedDir)) {
-    await unlinkAsync(path.join(indexedDir, file));
+  for (const file of await readdirAsync(store.indexedDir)) {
+    await unlinkAsync(path.join(store.indexedDir, file));
   }
 };
