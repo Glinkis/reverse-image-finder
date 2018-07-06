@@ -4,7 +4,7 @@
   "description": "A reverse image finder application.",
   "main": "src/start.ts",
   "scripts": {
-    "postinstall": "electron-rebuild",
+    "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
@@ -38,7 +38,6 @@
     "pdfjs-dist": "2.0.489",
     "pixelmatch": "4.0.2",
     "pngjs": "3.3.3",
-    "psd": "3.2.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-hot-loader": "4.3.3",
@@ -62,7 +61,6 @@
     "electron-builder": "20.19.1",
     "electron-mocha": "6.0.4",
     "electron-prebuilt-compile": "2.0.4",
-    "electron-rebuild": "1.8.1",
     "mocha": "5.2.0",
     "ts-node": "7.0.0",
     "typescript": "next"
