@@ -1,7 +1,6 @@
 import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
 import { store } from "../store";
-import { create2dContext } from "../misc/create2dContext";
 
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore
@@ -21,6 +20,13 @@ const decodePdf = async (imagePath: string) => {
   await page.render({ canvasContext, viewport });
 
   return canvasContext.getImageData(0, 0, width, height);
+};
+
+const create2dContext = (width: number, height: number) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  return canvas.getContext("2d") as CanvasRenderingContext2D;
 };
 
 store.decoders.set(".pdf", decodePdf);
