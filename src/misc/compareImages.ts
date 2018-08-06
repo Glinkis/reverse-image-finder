@@ -1,4 +1,4 @@
-// @ts-ignoreimport { decodePng } from "./decodePng";
+// @ts-ignore
 import * as pixelmatch from "pixelmatch";
 import * as crypto from "crypto";
 import { store } from "../store";
