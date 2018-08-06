@@ -2,10 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 import { app, remote } from "electron";
 import { readdirAsync, unlinkAsync } from "./promisified";
-import { PNG } from "pngjs";
 import { decodePng } from "../decoders/decodePng";
 import { ImageBuffer, store } from "../store";
 import { resizeImageData } from "./resizeImageData";
+import * as sharp from "sharp";
 
 store.indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
@@ -26,14 +26,18 @@ export const readIndexedImage = (name: string) => {
   }
 };
 
-export const writeIndexedImage = (name: string, image: ImageBuffer) => {
+// TODO: Resize with sharp.
+export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   const file = path.join(store.indexedDir, name);
   const resized = resizeImageData(image, 64, 64);
 
-  Object.assign(new PNG(), resized)
-    .pack()
-    .pipe(fs.createWriteStream(file))
-    .on("close", () => store.indexed++);
+  await sharp(resized.data, {
+    raw: { channels: 4, width: resized.width, height: resized.height }
+  })
+    .png()
+    .toFile(file);
+
+  store.indexed++;
 
   return resized;
 };
