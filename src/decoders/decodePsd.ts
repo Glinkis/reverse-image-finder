@@ -3,9 +3,6 @@ import * as PSD from "../../psd.js/index.js";
 import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
 
-/**
- * {@link https://github.com/meltingice/psd.js}
- */
 const decodePsd = async (imagePath: string) => {
   const fileBuffer = await readFileAsync(imagePath);
   const psd = new PSD(fileBuffer);

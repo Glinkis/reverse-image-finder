@@ -1,5 +1,8 @@
 import * as sharp from "sharp";
 
+/**
+ * {@link https://github.com/lovell/sharp}
+ */
 export const decodeWithSharp = async (imagePath: string) => {
   const image = await sharp(imagePath);
   const buffer = await image.raw().toBuffer({ resolveWithObject: true });
