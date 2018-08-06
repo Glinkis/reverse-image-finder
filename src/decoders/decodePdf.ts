@@ -1,7 +1,7 @@
 import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
 import { store } from "../store";
-import { create2dContext } from "../misc/decodeWithCanvas";
+import { create2dContext } from "../misc/create2dContext";
 
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore
