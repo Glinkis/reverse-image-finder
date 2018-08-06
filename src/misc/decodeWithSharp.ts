@@ -9,7 +9,7 @@ export const decodeWithSharp = async (imagePath: string) => {
   const { width, height } = buffer.info;
 
   if (buffer.info.channels === 3) {
-    buffer.data = addAlphaChannel(buffer.data, width, height);
+    buffer.data = addAlphaChannel(buffer.data);
   }
 
   return {
@@ -19,8 +19,8 @@ export const decodeWithSharp = async (imagePath: string) => {
   };
 };
 
-const addAlphaChannel = (rgb: Buffer, width: number, height: number) => {
-  const rgba = new Uint8Array(width * height * 4);
+const addAlphaChannel = (rgb: Buffer) => {
+  const rgba = new Uint8Array((rgb.length / 3) * 4);
 
   for (let i = 0, j = 0; i < rgb.length; i += 3, j += 4) {
     rgba[j + 0] = rgb[i + 0];
