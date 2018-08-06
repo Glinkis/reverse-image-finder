@@ -1,7 +1,7 @@
 import { store } from "../store";
-import { decodeWithCanvas } from "../misc/decodeWithCanvas";
+import { decodeWithSharp } from "../misc/decodeWithSharp";
 
-const decodeJpg = (imagePath: string) => decodeWithCanvas(imagePath);
+const decodeJpg = (imagePath: string) => decodeWithSharp(imagePath);
 
 store.decoders.set(".jpg", decodeJpg);
 store.decoders.set(".jpeg", decodeJpg);

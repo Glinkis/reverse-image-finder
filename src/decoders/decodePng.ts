@@ -1,23 +1,9 @@
-import * as fs from "fs";
-import { PNG } from "pngjs";
-import { store, ImageBuffer } from "../store";
+import { store } from "../store";
+import { decodeWithSharp } from "../misc/decodeWithSharp";
 
 /**
  * {@link https://github.com/lukeapage/pngjs}
  */
-export const decodePng = async (imagePath: string) => {
-  const stream = fs.createReadStream(imagePath);
-  const png = new PNG();
-
-  // prettier-ignore
-  await new Promise<ImageBuffer>((resolve, reject) =>
-    stream.pipe(png).on("error", reject).on("parsed", resolve));
-
-  return {
-    data: png.data,
-    width: png.width,
-    height: png.height
-  };
-};
+export const decodePng = (imagePath: string) => decodeWithSharp(imagePath);
 
 store.decoders.set(".png", decodePng);
