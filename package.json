@@ -43,7 +43,6 @@
     "react-hot-loader": "4.3.4",
     "rsvp": "~ 3.0.6",
     "sharp": "0.20.5",
-    "utif": "2.0.0",
     "webpack": "4.16.5"
   },
   "devDependencies": {
