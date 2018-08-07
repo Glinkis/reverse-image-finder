@@ -1,16 +1,13 @@
-import { app, BrowserWindow } from "electron";
-import { enableLiveReload } from "electron-compile";
-import { autoUpdater } from "electron-updater";
-import * as url from "url";
-import * as path from "path";
+const {
+  app,
+  BrowserWindow
+} = require("electron");
+const {
+  autoUpdater
+} = require("electron-updater");
+require('electron-reload')(__dirname)
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
-
-if (isDevMode) {
-  enableLiveReload({ strategy: "react-hmr" });
-}
-
-let win: BrowserWindow | null;
 
 const createWindow = () => {
   win = new BrowserWindow({
@@ -19,13 +16,7 @@ const createWindow = () => {
     title: "Reverse Image Finder"
   });
 
-  win.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "./index.html"),
-      protocol: "file:",
-      slashes: true
-    })
-  );
+  win.loadURL(`file://${__dirname}/build/index.html`);
 
   if (isDevMode) {
     win.webContents.openDevTools();

@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node",
         "target": "es2017",
         "module": "commonjs",
         "sourceMap": true,
-        "inlineSourceMap": true,
         "experimentalDecorators": true,
         "allowJs": true,
         "jsx": "react",
         "strict": true,
-        "lib": ["dom", "esnext"]
+        "lib": ["dom", "esnext", "webworker"]
     }
 }
