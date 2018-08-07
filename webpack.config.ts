@@ -2,6 +2,7 @@ import * as HtmlWebpackPlugin from "html-webpack-plugin";
 
 module.exports = {
   watch: true,
+  devtool: "source-map",
   target: "electron-renderer",
   entry: "./src/index.tsx",
   output: {
@@ -12,7 +13,8 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader"
+        loader: "ts-loader",
+        options: { compilerOptions: { module: "esnext" } }
       },
       {
         test: /\.node$/,
@@ -20,7 +22,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"]
+        loaders: [
+          "style-loader?sourceMap",
+          "css-loader?sourceMap",
+          "sass-loader?sourceMap"
+        ]
       }
     ]
   },
