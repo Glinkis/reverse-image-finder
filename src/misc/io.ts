@@ -26,21 +26,25 @@ export const readIndexedImage = (name: string) => {
 };
 
 export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
+  const { data, width, height } = image;
   const file = path.join(store.indexedDir, name);
-  const buffer = Buffer.from(image.data.buffer as ArrayBuffer);
-  const resized = await sharp(buffer, {
-    raw: { channels: 4, width: image.width, height: image.height }
+  const buffer = Buffer.from(data.buffer as ArrayBuffer);
+
+  const resizedImage = await sharp(buffer, {
+    raw: { channels: 4, width, height }
   }).resize(64, 64);
 
-  const result = await resized.toBuffer({ resolveWithObject: true });
+  const resizedBuffer = await resizedImage.toBuffer({
+    resolveWithObject: true
+  });
 
-  await resized.png().toFile(file);
+  await resizedImage.png().toFile(file);
   store.indexed++;
 
   return {
-    data: result.data,
-    width: result.info.width,
-    height: result.info.height
+    data: resizedBuffer.data,
+    width: resizedBuffer.info.width,
+    height: resizedBuffer.info.height
   };
 };
 
