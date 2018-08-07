@@ -5,7 +5,6 @@ import { readdirAsync, statAsync } from "./promisified";
 type FileFilter = (file: string) => boolean;
 
 export const walkDirectory = async (dir: string, filter?: FileFilter) => {
-  store.isSearching = true;
   let results: string[] = [];
 
   const list = await readdirAsync(dir).catch(console.error);
@@ -40,14 +39,14 @@ export const walkDirectory = async (dir: string, filter?: FileFilter) => {
         return results;
       }
     } else {
+      store.searchedFiles++;
+
       if (filter && !filter(file)) {
         continue;
       }
 
       results.push(file);
     }
-
-    store.searchedFiles++;
 
     if (!--pending) {
       return results;

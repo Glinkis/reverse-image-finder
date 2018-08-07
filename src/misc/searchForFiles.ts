@@ -10,8 +10,10 @@ export const searchForFiles = async () => {
 
   store.searchedFiles = 0;
   store.indexed = 0;
+  store.isSearching = true;
 
   const files = await walkDirectory(store.directory, checkFileSupport);
+
   store.isSearching = false;
 
   if (!files || !store.image) {
