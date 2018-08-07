@@ -4,7 +4,6 @@ import { app, remote } from "electron";
 import { readdirAsync, unlinkAsync } from "./promisified";
 import { decodePng } from "../decoders/decodePng";
 import { ImageBuffer, store } from "../store";
-import { resizeImageData } from "./resizeImageData";
 import * as sharp from "sharp";
 
 store.indexedDir = (() => {
@@ -26,20 +25,23 @@ export const readIndexedImage = (name: string) => {
   }
 };
 
-// TODO: Resize with sharp.
 export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   const file = path.join(store.indexedDir, name);
-  const resized = resizeImageData(image, 64, 64);
+  const buffer = Buffer.from(image.data.buffer as ArrayBuffer);
+  const resized = await sharp(buffer, {
+    raw: { channels: 4, width: image.width, height: image.height }
+  }).resize(64, 64);
 
-  await sharp(resized.data, {
-    raw: { channels: 4, width: resized.width, height: resized.height }
-  })
-    .png()
-    .toFile(file);
+  const result = await resized.toBuffer({ resolveWithObject: true });
 
+  await resized.png().toFile(file);
   store.indexed++;
 
-  return resized;
+  return {
+    data: result.data,
+    width: result.info.width,
+    height: result.info.height
+  };
 };
 
 export const clearIndexedImages = async () => {
