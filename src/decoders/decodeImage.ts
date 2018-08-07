@@ -2,7 +2,7 @@ import * as path from "path";
 import { store } from "../store";
 import "./decodeJpg";
 import "./decodePng";
-// import "./decodePsd";
+import "./decodePsd";
 import "./decodeTif";
 import "./decodePdf";
 import "./decodeSvg";

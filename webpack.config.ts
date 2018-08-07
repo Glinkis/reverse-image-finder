@@ -21,10 +21,6 @@ module.exports = {
         loader: "node-loader"
       },
       {
-        test: /\.coffee$/,
-        loader: "coffee-loader"
-      },
-      {
         test: /\.scss$/,
         loaders: [
           "style-loader?sourceMap",
@@ -43,6 +39,6 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".node", ".coffee", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".node", ".json"]
   }
 };

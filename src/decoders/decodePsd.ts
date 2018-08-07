@@ -1,10 +1,11 @@
-// @ts-ignore
-import * as PSD from "../../psd.js/lib/psd.coffee";
+import "../../psdjs";
 import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
 
 const decodePsd = async (imagePath: string) => {
   const fileBuffer = await readFileAsync(imagePath);
+
+  // @ts-ignore
   const psd = new PSD(fileBuffer);
   psd.parse();
   return {

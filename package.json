@@ -7,9 +7,12 @@
     "postinstall": "electron-builder install-app-deps",
     "serve": "electron .",
     "build": "webpack --mode development --progress",
+    "build:psd": "webpack --config webpack.psd.ts --mode production --progress",
+    "prestart": "npm run build:psd",
     "start": "npm-run-all --parallel build serve",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
+    "pretest": "npm run build:psd",
     "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer",
     "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive"
   },
@@ -24,6 +27,8 @@
   },
   "homepage": "https://github.com/Glinkis/reverse-image-finder#readme",
   "dependencies": {
+    "coffee-script": "~ 1.7.1",
+    "coffeescript-module": "~ 0.2.1",
     "electron-devtools-installer": "2.2.4",
     "electron-reload": "1.2.5",
     "electron-squirrel-startup": "1.0.0",
