@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/Glinkis/reverse-image-finder#readme",
   "dependencies": {
-    "coffee-script": "~ 1.7.1",
-    "coffeescript-module": "~ 0.2.1",
     "electron-devtools-installer": "2.2.4",
     "electron-reload": "1.2.5",
     "electron-squirrel-startup": "1.0.0",
