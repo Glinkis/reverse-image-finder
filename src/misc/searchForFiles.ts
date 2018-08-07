@@ -14,13 +14,15 @@ export const searchForFiles = async () => {
 
   const files = await walkDirectory(store.directory, checkFileSupport);
 
-  store.isSearching = false;
-
   if (!files || !store.image) {
     return;
   }
 
   for (const file of files) {
+    if (!store.isSearching) {
+      return;
+    }
+
     if (file === store.image) {
       continue;
     }
@@ -29,6 +31,8 @@ export const searchForFiles = async () => {
       store.images.push(file);
     }
   }
+
+  store.isSearching = false;
 };
 
 export const checkFileSupport = (file: string) => {
