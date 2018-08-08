@@ -2,9 +2,11 @@ import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
 import { store } from "../store";
 
+// @ts-ignore
+import * as pdfWorkerSrc from "file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js";
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 // @ts-ignore
-PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
+PDFJS.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
 
 /**
  * {@link https://github.com/mozilla/pdf.js}
