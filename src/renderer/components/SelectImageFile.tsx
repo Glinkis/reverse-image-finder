@@ -16,7 +16,7 @@ export const SelectImageFile = () => (
 
 export const SelectedImageFile = observer(() => {
   if (!store.image) return null;
-  return imageRow(store.image);
+  return imageRow(store.image, 0);
 });
 
 const openImage = () => {

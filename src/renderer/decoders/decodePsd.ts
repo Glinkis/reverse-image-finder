@@ -1,4 +1,4 @@
-import "../../psdjs";
+import "../../../psdjs";
 import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
 

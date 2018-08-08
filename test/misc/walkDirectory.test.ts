@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { walkDirectory } from "../../src/misc/walkDirectory";
-import { checkFileSupport } from "../../src/misc/searchForFiles";
+import { walkDirectory } from "../../src/renderer/misc/walkDirectory";
+import { checkFileSupport } from "../../src/renderer/misc/searchForFiles";
 import * as path from "path";
 
 const assets = path.join(__dirname, "../", "assets");

@@ -9,12 +9,10 @@ module.exports = {
     libraryTarget: "window"
   },
   module: {
-    rules: [
-      {
-        test: /\.coffee$/,
-        loader: "coffee-loader"
-      }
-    ]
+    rules: [{
+      test: /\.coffee$/,
+      loader: "coffee-loader"
+    }]
   },
   resolve: {
     extensions: [".js", ".coffee", ".json"]

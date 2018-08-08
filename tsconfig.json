@@ -1,13 +1,16 @@
 {
+    "extends": "./node_modules/electron-webpack/tsconfig-base.json",
     "compilerOptions": {
         "moduleResolution": "node",
         "target": "es2017",
-        "module": "commonjs",
+        "module": "esnext",
         "sourceMap": true,
         "experimentalDecorators": true,
         "allowJs": true,
         "jsx": "react",
         "strict": true,
-        "lib": ["dom", "esnext", "webworker"]
+        "lib": ["dom", "esnext"],
+        "noImplicitAny": false,
+        "noImplicitReturns": false
     }
 }

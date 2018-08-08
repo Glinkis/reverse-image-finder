@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { store } from "../../src/store";
-import { compareImages } from "../../src/misc/compareImages";
+import { store } from "../../src/renderer/store";
+import { compareImages } from "../../src/renderer/misc/compareImages";
 import * as path from "path";
 
 describe("compareImages", () => {
