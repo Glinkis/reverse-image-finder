@@ -1,4 +1,5 @@
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
+import { Configuration } from "webpack";
 
 module.exports = {
   watch: true,
@@ -8,6 +9,9 @@ module.exports = {
   output: {
     path: __dirname + "/build",
     filename: "bundle.js"
+  },
+  optimization: {
+    runtimeChunk: true
   },
   module: {
     rules: [
@@ -21,12 +25,8 @@ module.exports = {
         loader: "node-loader"
       },
       {
-        test: /\.scss$/,
-        loaders: [
-          "style-loader?sourceMap",
-          "css-loader?sourceMap",
-          "sass-loader?sourceMap"
-        ]
+        test: /\.css$/,
+        loaders: ["style-loader?sourceMap", "css-loader?sourceMap"]
       }
     ]
   },
@@ -41,4 +41,4 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".node", ".json"]
   }
-};
+} as Configuration;
