@@ -1,6 +1,7 @@
 const {
   app,
-  BrowserWindow
+  BrowserWindow,
+  Menu
 } = require("electron");
 const {
   autoUpdater
@@ -17,6 +18,25 @@ const createWindow = () => {
   });
 
   win.loadURL(`file://${__dirname}/build/index.html`);
+
+  const menu = Menu.buildFromTemplate([{
+    label: 'Menu',
+    submenu: [{
+        label: 'Open Devtools',
+        click() {
+          win.webContents.openDevTools();
+        }
+      },
+      {
+        label: 'Exit',
+        click() {
+          app.quit()
+        }
+      }
+    ]
+  }])
+
+  Menu.setApplicationMenu(menu);
 
   if (isDevMode) {
     win.webContents.openDevTools();
