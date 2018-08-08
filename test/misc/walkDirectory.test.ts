@@ -7,7 +7,14 @@ const assets = path.join(__dirname, "../", "assets");
 
 describe("walkDirectory", () => {
   it("finds a deeply nested image", async () => {
-    const files = await walkDirectory(assets, checkFileSupport);
+    const files: string[] = [];
+    await walkDirectory(
+      assets,
+      file => {
+        files.push(file);
+      },
+      checkFileSupport
+    );
     const names = files.map(file => path.basename(file));
     expect(names).contains("img-deep.png");
   });

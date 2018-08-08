@@ -12,27 +12,18 @@ export const searchForFiles = async () => {
   store.indexed = 0;
   store.isSearching = true;
 
-  const files = await walkDirectory(store.directory, checkFileSupport);
-
-  if (!files || !store.image) {
-    return;
-  }
-
-  for (const file of files) {
-    if (!store.isSearching) {
-      return;
-    }
-
-    if (file === store.image) {
-      continue;
-    }
-
-    if (await compareImages(store.image, file)) {
-      store.images.push(file);
-    }
-  }
+  await walkDirectory(store.directory, handleImageFile, checkFileSupport);
 
   store.isSearching = false;
+};
+
+const handleImageFile = async (file: string) => {
+  if (!store.image || !store.isSearching || file === store.image) {
+    return;
+  }
+  if (await compareImages(store.image, file)) {
+    store.images.push(file);
+  }
 };
 
 export const checkFileSupport = (file: string) => {
