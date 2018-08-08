@@ -10,7 +10,7 @@ export const walkDirectory = async (
   filter?: FileFilter
 ) => {
   store.isSearching = true;
-  const recurse = async (
+  const walkDir = async (
     dir: string,
     callback: (file: string) => void,
     filter?: FileFilter
@@ -18,12 +18,6 @@ export const walkDirectory = async (
     const list = await readdirAsync(dir).catch(console.error);
 
     if (!list) {
-      return;
-    }
-
-    let pending = list.length;
-
-    if (!pending) {
       return;
     }
 
@@ -37,11 +31,7 @@ export const walkDirectory = async (
       const stat = await statAsync(file).catch(console.error);
 
       if (stat && stat.isDirectory()) {
-        await recurse(file, callback, filter).catch(console.error);
-
-        if (!--pending) {
-          return;
-        }
+        await walkDir(file, callback, filter).catch(console.error);
       } else {
         store.searchedFiles++;
 
@@ -51,12 +41,8 @@ export const walkDirectory = async (
 
         callback(file);
       }
-
-      if (!--pending) {
-        return;
-      }
     }
   };
-  await recurse(dir, callback, filter);
+  await walkDir(dir, callback, filter);
   store.isSearching = false;
 };
