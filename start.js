@@ -9,15 +9,21 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 
 const createWindow = () => {
   win = new BrowserWindow({
-    width: isDevMode ? 1000 : 500,
-    height: 500,
+    width: isDevMode ? 1500 : 500,
+    height: isDevMode ? 1000 : 500,
     title: "Reverse Image Finder",
-    webPreferences: {
-      webSecurity: false
-    }
   });
 
-  win.loadURL(`file://${__dirname}/build/index.html`);
+  win.loadURL(`file://${__dirname}/app/index.html`);
+
+  win.on("closed", () => {
+    win = null;
+  });
+
+  if (isDevMode) {
+    win.webContents.openDevTools();
+    return;
+  };
 
   const menu = Menu.buildFromTemplate([{
     label: 'Menu',
@@ -37,14 +43,6 @@ const createWindow = () => {
   }])
 
   Menu.setApplicationMenu(menu);
-
-  if (isDevMode) {
-    win.webContents.openDevTools();
-  }
-
-  win.on("closed", () => {
-    win = null;
-  });
 };
 
 app.on("ready", () => {

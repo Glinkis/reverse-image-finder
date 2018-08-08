@@ -2,12 +2,12 @@ import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
 import * as path from "path";
 
-module.exports = {
+export default {
   devtool: "source-map",
   target: "electron-renderer",
   entry: path.resolve(__dirname, "src", "index.tsx"),
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "app"),
     filename: "bundle.js"
   },
   optimization: {
@@ -22,7 +22,11 @@ module.exports = {
         test: /\.tsx?$/,
         include: /src/,
         loader: "ts-loader",
-        options: { compilerOptions: { module: "esnext" } }
+        options: {
+          compilerOptions: {
+            module: "esnext"
+          }
+        }
       },
       {
         test: /\.node$/,
@@ -33,10 +37,6 @@ module.exports = {
         loaders: ["style-loader?sourceMap", "css-loader?sourceMap"]
       }
     ]
-  },
-  node: {
-    __dirname: false,
-    __filename: false
   },
   plugins: [
     new HtmlWebpackPlugin({
