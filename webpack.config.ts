@@ -2,7 +2,6 @@ import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
 
 module.exports = {
-  watch: true,
   devtool: "source-map",
   target: "electron-renderer",
   entry: "./src/index.tsx",

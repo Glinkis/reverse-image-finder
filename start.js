@@ -3,9 +3,6 @@ const {
   BrowserWindow,
   Menu
 } = require("electron");
-const {
-  autoUpdater
-} = require("electron-updater");
 require('electron-reload')(__dirname)
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
@@ -49,7 +46,6 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on("window-all-closed", () => {

@@ -6,10 +6,11 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "serve": "electron .",
-    "build": "webpack --mode development --progress --color",
+    "build": "webpack --mode development --progress --color --watch",
+    "build:pro": "webpack --mode production --progress --color",
     "build:psd": "webpack --config webpack.psd.ts --mode production --progress --color",
     "start": "npm run build & npm run serve",
-    "dist": "electron-builder",
+    "dist": "npm run build:pro && electron-builder",
     "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer",
     "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive"
   },
@@ -28,8 +29,6 @@
     "coffeescript-module": "~ 0.2.1",
     "electron-devtools-installer": "2.2.4",
     "electron-reload": "1.2.5",
-    "electron-squirrel-startup": "1.0.0",
-    "electron-updater": "3.0.3",
     "iconv-lite": "~ 0.4.4",
     "jspack": "~ 0.0.3",
     "lodash": "~ 2.4",
