@@ -1,5 +1,3 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 module.exports = {
   entry: "./src/renderer/main.tsx",
   module: {
