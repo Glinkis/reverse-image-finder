@@ -11,7 +11,10 @@ module.exports = {
     filename: "bundle.js"
   },
   optimization: {
-    runtimeChunk: true
+    runtimeChunk: true,
+    splitChunks: {
+      chunks: "all"
+    }
   },
   module: {
     rules: [
@@ -30,14 +33,16 @@ module.exports = {
       }
     ]
   },
-
+  node: {
+    __dirname: false,
+    __filename: false
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./src/index.html"
     })
   ],
-
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".node", ".json"]
   }

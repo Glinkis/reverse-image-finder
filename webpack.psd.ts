@@ -1,3 +1,5 @@
+import { Configuration } from "webpack";
+
 module.exports = {
   target: "node",
   devtool: "source-map",
@@ -19,4 +21,4 @@ module.exports = {
   resolve: {
     extensions: [".js", ".coffee", ".json"]
   }
-};
+} as Configuration;
