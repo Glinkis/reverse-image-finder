@@ -1,12 +1,13 @@
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
+import * as path from "path";
 
 module.exports = {
   devtool: "source-map",
   target: "electron-renderer",
-  entry: "./src/index.tsx",
+  entry: path.resolve(__dirname, "src", "index.tsx"),
   output: {
-    path: __dirname + "/build",
+    path: path.resolve(__dirname, "build"),
     filename: "bundle.js"
   },
   optimization: {
@@ -19,6 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
+        include: /src/,
         loader: "ts-loader",
         options: { compilerOptions: { module: "esnext" } }
       },

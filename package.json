@@ -75,7 +75,9 @@
   "build": {
     "productName": "Reverse Image Finder",
     "files": [
-      "!test/*"
+      "!src/*",
+      "!test/*",
+      "!psd.js/*"
     ],
     "publish": {
       "provider": "github",

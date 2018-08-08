@@ -11,7 +11,10 @@ const createWindow = () => {
   win = new BrowserWindow({
     width: isDevMode ? 1000 : 500,
     height: 500,
-    title: "Reverse Image Finder"
+    title: "Reverse Image Finder",
+    webPreferences: {
+      webSecurity: false
+    }
   });
 
   win.loadURL(`file://${__dirname}/build/index.html`);
