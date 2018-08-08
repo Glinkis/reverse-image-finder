@@ -81,12 +81,6 @@
     "files": [
       "!test/*"
     ],
-    "publish": {
-      "provider": "github",
-      "owner": "Glinkis",
-      "repo": "reverse-image-finder",
-      "private": false
-    },
     "dmg": {},
     "win": {
       "target": [
