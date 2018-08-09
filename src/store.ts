@@ -7,11 +7,11 @@ export type TypedArray =
   | Uint16Array
   | Uint32Array;
 
-export type ImageBuffer = {
+export interface ImageBuffer {
   data: TypedArray;
   width: number;
   height: number;
-};
+}
 
 export type Decoder = (image: string) => Promise<ImageBuffer>;
 
@@ -29,14 +29,14 @@ export interface Store {
 }
 
 export const store = observable({
-  image: null,
-  directory: null,
-  isSearching: false,
-  images: [],
   decoders: new Map<string, Decoder>(),
-  threshold: 0.03,
-  searchedFiles: 0,
+  directory: null,
+  image: null,
+  images: [],
   indexed: 0,
   indexedDir: "",
-  logIndexing: false
+  isSearching: false,
+  logIndexing: false,
+  searchedFiles: 0,
+  threshold: 0.03
 } as Store);

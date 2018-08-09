@@ -1,6 +1,5 @@
 import { shell } from "electron";
 import { observer } from "mobx-react";
-import * as path from "path";
 import * as React from "react";
 import { store } from "../store";
 
