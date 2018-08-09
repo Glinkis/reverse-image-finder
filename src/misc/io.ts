@@ -17,11 +17,11 @@ store.indexedDir = (() => {
   return dir;
 })();
 
-export const readIndexedImage = (name: string) => {
+export const readIndexedImage = async (name: string) => {
   const file = path.join(store.indexedDir, name);
 
   if (fs.existsSync(file)) {
-    return decodePng(file);
+    return await decodePng(file);
   }
 };
 
@@ -37,6 +37,11 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   const resizedBuffer = await resizedImage.toBuffer({
     resolveWithObject: true
   });
+
+  // Remove file is already exists.
+  if (fs.existsSync(file)) {
+    unlinkAsync(file);
+  }
 
   await resizedImage.png().toFile(file);
   store.indexed++;
