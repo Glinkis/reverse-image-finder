@@ -8,19 +8,25 @@ import { ClearIndexed } from "./ClearIndexed";
 import { SearchStats } from "./SearchStats";
 import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
 import { LogIndexing } from "./LogIndexing";
+import { SupportedFormats } from "./SupportedFormats";
 
 export const App = () => (
   <div id="app">
-    <SelectImageFile />
-    <SelectedImageFile />
-    <SelectDirectory />
-    <SelectedDirectory />
-    <OpenIndexedDirectory />
-    <ClearIndexed />
-    <LogIndexing />
-    <Threshold />
-    <Search />
-    <SearchStats />
-    <Images />
+    <div id="left">
+      <SupportedFormats />
+      <SelectImageFile />
+      <SelectedImageFile />
+      <SelectDirectory />
+      <SelectedDirectory />
+      <OpenIndexedDirectory />
+      <ClearIndexed />
+      <LogIndexing />
+      <Threshold />
+      <Search />
+      <SearchStats />
+    </div>
+    <div id="right">
+      <Images />
+    </div>
   </div>
 );

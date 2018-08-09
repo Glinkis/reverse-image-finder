@@ -7,14 +7,7 @@ import { extensions } from "../decoders/decodeImage";
 import { getImage } from "../misc/compareImages";
 
 export const SelectImageFile = () => (
-  <div>
-    <button onClick={openImage}>Select Image</button>
-    <br />
-    Supported formats:
-    {extensions.map(ext => (
-      <b key={ext}> {`.${ext}`} </b>
-    ))}
-  </div>
+  <button onClick={openImage}>Select Image</button>
 );
 
 export const SelectedImageFile = observer(() => {

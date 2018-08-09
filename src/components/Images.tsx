@@ -8,6 +8,6 @@ export const Images = observer(() => <div>{store.images.map(imageRow)}</div>);
 
 export const imageRow = (image: string, i?: number) => (
   <a key={i} href="#" onClick={() => shell.showItemInFolder(image)}>
-    {path.basename(image)}
+    {image}
   </a>
 );
