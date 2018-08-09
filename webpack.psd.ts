@@ -1,24 +1,24 @@
 import { Configuration } from "webpack";
 
-module.exports = {
-  target: "node",
+export default {
   devtool: "source-map",
   entry: "./psd.js/lib/psd.coffee",
-  output: {
-    path: __dirname,
-    filename: "psdjs.js",
-    library: "PSD",
-    libraryTarget: "window"
-  },
   module: {
     rules: [
       {
-        test: /\.coffee$/,
-        loader: "coffee-loader"
+        loader: "coffee-loader",
+        test: /\.coffee$/
       }
     ]
   },
+  output: {
+    filename: "psdjs.js",
+    library: "PSD",
+    libraryTarget: "window",
+    path: __dirname
+  },
   resolve: {
     extensions: [".js", ".coffee", ".json"]
-  }
+  },
+  target: "node"
 } as Configuration;

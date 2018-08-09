@@ -1,13 +1,27 @@
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
-import { Configuration } from "webpack";
 import * as path from "path";
+import { Configuration } from "webpack";
 
 export default {
   devtool: "source-map",
-  target: "electron-renderer",
   entry: path.resolve(__dirname, "src", "index.tsx"),
-  output: {
-    path: path.resolve(__dirname, "app")
+  module: {
+    rules: [
+      {
+        include: /src/,
+        loader: "ts-loader",
+        options: { compilerOptions: { module: "esnext" } },
+        test: /\.tsx?$/
+      },
+      {
+        loader: "node-loader",
+        test: /\.node$/
+      },
+      {
+        loaders: ["style-loader?sourceMap", "css-loader?sourceMap"],
+        test: /\.css$/
+      }
+    ]
   },
   optimization: {
     minimize: false,
@@ -16,27 +30,8 @@ export default {
       chunks: "all"
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        include: /src/,
-        loader: "ts-loader",
-        options: {
-          compilerOptions: {
-            module: "esnext"
-          }
-        }
-      },
-      {
-        test: /\.node$/,
-        loader: "node-loader"
-      },
-      {
-        test: /\.css$/,
-        loaders: ["style-loader?sourceMap", "css-loader?sourceMap"]
-      }
-    ]
+  output: {
+    path: path.resolve(__dirname, "app")
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -46,5 +41,6 @@ export default {
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".node", ".json"]
-  }
+  },
+  target: "electron-renderer"
 } as Configuration;
