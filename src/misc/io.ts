@@ -38,11 +38,6 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
     resolveWithObject: true
   });
 
-  // Remove file is already exists.
-  if (fs.existsSync(file)) {
-    unlinkAsync(file);
-  }
-
   await resizedImage.png().toFile(file);
   store.indexed++;
 
