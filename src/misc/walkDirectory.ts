@@ -10,6 +10,12 @@ export const walkDirectory = async (
   filter?: FileFilter
 ) => {
   store.isSearching = true;
+  let searched = 0;
+
+  const updateSearched = setInterval(() => {
+    store.searchedFiles = searched;
+  }, 500);
+
   const walkDir = async (
     dir: string,
     callback: (file: string) => void,
@@ -28,12 +34,12 @@ export const walkDirectory = async (
 
       file = path.resolve(dir, file);
 
-      const stat = await statAsync(file).catch(console.error);
+      const stat = await statAsync(file).catch(console.warn);
 
       if (stat && stat.isDirectory()) {
-        await walkDir(file, callback, filter).catch(console.error);
+        await walkDir(file, callback, filter).catch(console.warn);
       } else {
-        store.searchedFiles++;
+        searched++;
 
         if (filter && !filter(file)) {
           continue;
@@ -44,5 +50,6 @@ export const walkDirectory = async (
     }
   };
   await walkDir(dir, callback, filter);
+  clearInterval(updateSearched);
   store.isSearching = false;
 };
