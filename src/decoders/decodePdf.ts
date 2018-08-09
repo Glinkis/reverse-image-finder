@@ -2,11 +2,17 @@ import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
 import { store } from "../store";
 
-// @ts-ignore
-import * as pdfWorkerSrc from "file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js";
+// Fix incorrect typing.
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
-// @ts-ignore
-PDFJS.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+
+try {
+  const pdfWorkerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
+  // @ts-ignore
+  PDFJS.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+} catch {
+  // @ts-ignore
+  PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
+}
 
 /**
  * {@link https://github.com/mozilla/pdf.js}
