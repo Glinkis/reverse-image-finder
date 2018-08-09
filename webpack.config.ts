@@ -7,8 +7,7 @@ export default {
   target: "electron-renderer",
   entry: path.resolve(__dirname, "src", "index.tsx"),
   output: {
-    path: path.resolve(__dirname, "app"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, "app")
   },
   optimization: {
     minimize: false,

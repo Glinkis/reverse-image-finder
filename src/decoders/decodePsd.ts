@@ -1,6 +1,7 @@
-import "../../psdjs";
+import * as psdjs from "../../psdjs";
 import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
+console.log(psdjs);
 
 const decodePsd = async (imagePath: string) => {
   const fileBuffer = await readFileAsync(imagePath);
