@@ -25,6 +25,7 @@ export interface Store {
   searchedFiles: number;
   indexed: number;
   indexedDir: string;
+  logIndexing: boolean;
 }
 
 export const store = observable({
@@ -36,5 +37,6 @@ export const store = observable({
   threshold: 0.03,
   searchedFiles: 0,
   indexed: 0,
-  indexedDir: ""
+  indexedDir: "",
+  logIndexing: false
 } as Store);

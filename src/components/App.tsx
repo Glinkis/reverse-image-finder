@@ -7,6 +7,7 @@ import { Threshold } from "./Threshold";
 import { ClearIndexed } from "./ClearIndexed";
 import { SearchStats } from "./SearchStats";
 import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
+import { LogIndexing } from "./LogIndexing";
 
 export const App = () => (
   <div id="app">
@@ -16,6 +17,7 @@ export const App = () => (
     <SelectedDirectory />
     <OpenIndexedDirectory />
     <ClearIndexed />
+    <LogIndexing />
     <Threshold />
     <Search />
     <SearchStats />

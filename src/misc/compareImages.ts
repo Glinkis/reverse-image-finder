@@ -25,7 +25,7 @@ export const compareImages = async (path1: string, path2: string) => {
   return match / image1.data.length < store.threshold;
 };
 
-const getImage = async (imagePath: string) => {
+export const getImage = async (imagePath: string) => {
   const hash = hashFilePath(imagePath);
   let image: ImageBuffer | undefined;
 
@@ -39,7 +39,9 @@ const getImage = async (imagePath: string) => {
     return image;
   }
 
-  console.log(`Indexing ${imagePath}.`);
+  if (store.logIndexing) {
+    console.log(`Indexing ${imagePath}.`);
+  }
   image = await decodeImage(imagePath);
   return await writeIndexedImage(hash, image);
 };

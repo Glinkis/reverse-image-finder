@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { store } from "../store";
 import { imageRow } from "./Images";
 import { extensions } from "../decoders/decodeImage";
+import { getImage } from "../misc/compareImages";
 
 export const SelectImageFile = () => (
   <div>
@@ -29,5 +30,6 @@ const openImage = () => {
   });
   if (image) {
     store.image = image[0];
+    getImage(store.image);
   }
 };
