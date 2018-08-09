@@ -1,10 +1,10 @@
+import { app, remote } from "electron";
 import * as fs from "fs";
 import * as path from "path";
-import { app, remote } from "electron";
-import { readdirAsync, unlinkAsync } from "./promisified";
+import * as sharp from "sharp";
 import { decodePng } from "../decoders/decodePng";
 import { ImageBuffer, store } from "../store";
-import * as sharp from "sharp";
+import { readdirAsync, unlinkAsync } from "./promisified";
 
 store.indexedDir = (() => {
   const userDataDir = (app || remote.app).getPath("userData");
@@ -43,8 +43,8 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
 
   return {
     data: resizedBuffer.data,
-    width: resizedBuffer.info.width,
-    height: resizedBuffer.info.height
+    height: resizedBuffer.info.height,
+    width: resizedBuffer.info.width
   };
 };
 

@@ -1,5 +1,5 @@
-import { store } from "../store";
 import { decodeWithSharp } from "../misc/decodeWithSharp";
+import { store } from "../store";
 
 const decodeTif = (imagePath: string) => decodeWithSharp(imagePath);
 

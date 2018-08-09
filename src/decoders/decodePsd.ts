@@ -1,6 +1,6 @@
 import * as psdjs from "../../psdjs";
-import { store } from "../store";
 import { readFileAsync } from "../misc/promisified";
+import { store } from "../store";
 console.log(psdjs);
 
 const decodePsd = async (imagePath: string) => {
@@ -11,8 +11,8 @@ const decodePsd = async (imagePath: string) => {
   psd.parse();
   return {
     data: psd.image.pixelData,
-    width: psd.image.width(),
-    height: psd.image.height()
+    height: psd.image.height(),
+    width: psd.image.width()
   };
 };
 

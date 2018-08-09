@@ -1,5 +1,5 @@
-import * as React from "react";
 import { observer } from "mobx-react";
+import * as React from "react";
 import { store } from "../store";
 
 export const SearchStats = () => (
@@ -11,16 +11,22 @@ export const SearchStats = () => (
 );
 
 const SearchedFiles = observer(() => {
-  if (!store.searchedFiles) return null;
+  if (!store.searchedFiles) {
+    return null;
+  }
   return <div>{`Searched ${store.searchedFiles} files.`}</div>;
 });
 
 const IndexedFiles = observer(() => {
-  if (!store.indexed) return null;
+  if (!store.indexed) {
+    return null;
+  }
   return <div>{`Indexed ${store.indexed} images.`}</div>;
 });
 
 const MatchedFiles = observer(() => {
-  if (!store.images.length) return null;
+  if (!store.images.length) {
+    return null;
+  }
   return <div>{`Matched ${store.images.length} images.`}</div>;
 });

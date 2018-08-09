@@ -14,8 +14,8 @@ export const decodeWithSharp = async (imagePath: string) => {
 
   return {
     data: buffer.data,
-    width,
-    height
+    height,
+    width
   };
 };
 

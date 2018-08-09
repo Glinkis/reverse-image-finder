@@ -12,7 +12,9 @@
     "start": "npm run build & npm run serve",
     "dist": "npm run build:pro && electron-builder",
     "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer",
-    "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive"
+    "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive",
+    "lint": "tslint src/**/*.ts src/**/*.tsx test/**/*.ts",
+    "lint:fix": "tslint src/**/*.ts src/**/*.tsx test/**/*.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -69,6 +71,7 @@
     "style-loader": "0.22.1",
     "ts-loader": "4.4.2",
     "ts-node": "7.0.0",
+    "tslint": "5.11.0",
     "typescript": "3.0.1",
     "webpack": "4.16.5",
     "webpack-cli": "3.1.0"

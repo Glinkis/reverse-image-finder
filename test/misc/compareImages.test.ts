@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { store } from "../../src/store";
-import { compareImages } from "../../src/misc/compareImages";
 import * as path from "path";
+import { compareImages } from "../../src/misc/compareImages";
+import { store } from "../../src/store";
 
 describe("compareImages", () => {
   async function compareAssets(a: string, b: string) {

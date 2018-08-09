@@ -1,14 +1,14 @@
 import * as React from "react";
-import { SelectDirectory, SelectedDirectory } from "./SelectDirectory";
-import { SelectImageFile, SelectedImageFile } from "./SelectImageFile";
-import { Search } from "./Search";
-import { Images } from "./Images";
-import { Threshold } from "./Threshold";
 import { ClearIndexed } from "./ClearIndexed";
-import { SearchStats } from "./SearchStats";
-import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
+import { Images } from "./Images";
 import { LogIndexing } from "./LogIndexing";
+import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
+import { Search } from "./Search";
+import { SearchStats } from "./SearchStats";
+import { SelectDirectory, SelectedDirectory } from "./SelectDirectory";
+import { SelectedImageFile, SelectImageFile } from "./SelectImageFile";
 import { SupportedFormats } from "./SupportedFormats";
+import { Threshold } from "./Threshold";
 
 export const App = () => (
   <div id="app">

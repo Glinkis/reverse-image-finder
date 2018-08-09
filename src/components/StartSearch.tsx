@@ -1,6 +1,6 @@
 import * as React from "react";
-import { store } from "../store";
 import { searchForFiles } from "../misc/searchForFiles";
+import { store } from "../store";
 
 export const StartSearch = () => (
   <button onClick={startSearch}>Start Search</button>

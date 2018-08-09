@@ -1,12 +1,14 @@
+import * as crypto from "crypto";
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
-import * as crypto from "crypto";
-import { store, ImageBuffer } from "../store";
-import { writeIndexedImage, readIndexedImage } from "./io";
 import { decodeImage } from "../decoders/decodeImage";
+import { ImageBuffer, store } from "../store";
+import { readIndexedImage, writeIndexedImage } from "./io";
 
 export const compareImages = async (path1: string, path2: string) => {
-  if (path1 === path2) return true;
+  if (path1 === path2) {
+    return true;
+  }
 
   const image1 = await getImage(path1);
   const image2 = await getImage(path2);

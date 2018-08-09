@@ -1,11 +1,11 @@
 import * as path from "path";
 import { store } from "../store";
 import "./decodeJpg";
+import "./decodePdf";
 import "./decodePng";
 import "./decodePsd";
-import "./decodeTif";
-import "./decodePdf";
 import "./decodeSvg";
+import "./decodeTif";
 
 export const decodeImage = (imagePath: string) => {
   const ext = path.extname(imagePath).toLowerCase();

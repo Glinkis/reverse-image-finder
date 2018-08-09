@@ -6,9 +6,9 @@ import { store } from "../store";
 const PDFJS: typeof PDFJSType = PDFJSLib as any;
 
 try {
-  const pdfWorkerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
   // @ts-ignore
-  PDFJS.GlobalWorkerOptions.workerSrc = pdfWorkerSrc;
+  // tslint:disable
+  PDFJS.GlobalWorkerOptions.workerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
 } catch {
   // @ts-ignore
   PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
