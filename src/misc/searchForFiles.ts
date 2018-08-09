@@ -18,7 +18,8 @@ export const searchForFiles = async () => {
 };
 
 const handleImageFile = async (file: string) => {
-  if (!store.image || !store.isSearching || file === store.image) {
+  store.searchedFiles++;
+  if (!store.image || file === store.image) {
     return;
   }
   if (await compareImages(store.image, file)) {

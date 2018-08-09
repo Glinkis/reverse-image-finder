@@ -12,8 +12,8 @@ export const compareImages = async (path1: string, path2: string) => {
   const image2 = await getImage(path2);
 
   const match = pixelmatch(
-    image1.data,
-    image2.data,
+    image1.data as Buffer,
+    image2.data as Buffer,
     null,
     image1.width,
     image1.height,
