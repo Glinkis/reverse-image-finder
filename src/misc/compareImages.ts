@@ -34,7 +34,7 @@ export const getImage = async (imagePath: string) => {
   try {
     image = await readIndexedImage(hash);
   } catch (error) {
-    console.log(`Index is corrupted, re-indexing ${imagePath}.`);
+    console.log(`Index is corrupted, re-indexing file://${imagePath}.`);
   }
 
   if (image) {
@@ -42,7 +42,7 @@ export const getImage = async (imagePath: string) => {
   }
 
   if (store.logIndexing) {
-    console.log(`Indexing ${imagePath}.`);
+    console.log(`Indexing file://${imagePath}.`);
   }
   image = await decodeImage(imagePath);
   return await writeIndexedImage(hash, image);
