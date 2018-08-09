@@ -10,8 +10,11 @@ export const SelectDirectory = () => (
 export const SelectedDirectory = observer(() => <div>{store.directory}</div>);
 
 const openDirectory = () => {
-  store.directory = remote.dialog.showOpenDialog({
+  const directory = remote.dialog.showOpenDialog({
     title: "Select Directory",
     properties: ["openDirectory"]
-  })[0];
+  });
+  if (directory) {
+    store.directory = directory[0];
+  }
 };

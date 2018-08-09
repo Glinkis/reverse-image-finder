@@ -10,7 +10,9 @@ export const SelectImageFile = () => (
     <button onClick={openImage}>Select Image</button>
     <br />
     Supported formats:
-    {extensions.map(ext => <b key={ext}> {`.${ext}`} </b>)}
+    {extensions.map(ext => (
+      <b key={ext}> {`.${ext}`} </b>
+    ))}
   </div>
 );
 
@@ -20,9 +22,12 @@ export const SelectedImageFile = observer(() => {
 });
 
 const openImage = () => {
-  store.image = remote.dialog.showOpenDialog({
+  const image = remote.dialog.showOpenDialog({
     title: "Select Image",
     filters: [{ name: "Image", extensions }],
     properties: ["openFile"]
-  })[0];
+  });
+  if (image) {
+    store.image = image[0];
+  }
 };
