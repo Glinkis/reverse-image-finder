@@ -32,13 +32,14 @@ const getImage = async (imagePath: string) => {
   try {
     image = await readIndexedImage(hash);
   } catch (error) {
-    console.log(`Corrupted file: ${error}, reindexing.`);
+    console.log(`Index is corrupted, re-indexing ${imagePath}.`);
   }
 
   if (image) {
     return image;
   }
 
+  console.log(`Indexing ${imagePath}.`);
   image = await decodeImage(imagePath);
   return await writeIndexedImage(hash, image);
 };
