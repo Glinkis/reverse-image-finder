@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
 import * as crypto from "crypto";
-import { store } from "../store";
+import { store, ImageBuffer } from "../store";
 import { writeIndexedImage, readIndexedImage } from "./io";
 import { decodeImage } from "../decoders/decodeImage";
 
@@ -27,17 +27,20 @@ export const compareImages = async (path1: string, path2: string) => {
 
 const getImage = async (imagePath: string) => {
   const hash = hashFilePath(imagePath);
+  let image: ImageBuffer | undefined;
 
-  const indexedImage = await readIndexedImage(hash).catch(err => {
-    console.log(`Corrupted file: ${err}, reindexing.`);
-  });
-
-  if (indexedImage) {
-    return indexedImage;
+  try {
+    image = await readIndexedImage(hash);
+  } catch (error) {
+    console.log(`Corrupted file: ${error}, reindexing.`);
   }
 
-  const decodedImage = await decodeImage(imagePath);
-  return await writeIndexedImage(hash, decodedImage);
+  if (image) {
+    return image;
+  }
+
+  image = await decodeImage(imagePath);
+  return await writeIndexedImage(hash, image);
 };
 
 const hashFilePath = (filePath: string) =>
