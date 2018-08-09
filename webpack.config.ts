@@ -11,6 +11,7 @@ export default {
     filename: "bundle.js"
   },
   optimization: {
+    minimize: false,
     runtimeChunk: true,
     splitChunks: {
       chunks: "all"
