@@ -28,8 +28,8 @@ export const compareImages = async (path1: string, path2: string) => {
 const getImage = async (imagePath: string) => {
   const hash = hashFilePath(imagePath);
 
-  const indexedImage = await readIndexedImage(hash).catch(() => {
-    console.log("Corrupted file, reindexing.");
+  const indexedImage = await readIndexedImage(hash).catch(err => {
+    console.log(`Corrupted file: ${err}, reindexing.`);
   });
 
   if (indexedImage) {
