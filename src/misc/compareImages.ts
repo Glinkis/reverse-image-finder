@@ -11,12 +11,12 @@ export const compareImages = async (path1: string, path2: string) => {
   const image1 = await getImage(path1);
   const image2 = await getImage(path2);
 
-  if (image1.channels !== image2.channels) {
-    if (image1.channels === 3) {
-      image1.data = addAlphaChannel(image1.data);
-    } else {
-      image2.data = addAlphaChannel(image2.data);
-    }
+  if (image1.channels === 3 && image2.channels === 4) {
+    image1.data = addAlphaChannel(image1.data);
+  }
+
+  if (image1.channels === 4 && image2.channels === 3) {
+    image2.data = addAlphaChannel(image2.data);
   }
 
   if (image1.data.byteLength !== image2.data.byteLength) {

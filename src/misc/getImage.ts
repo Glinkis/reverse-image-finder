@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import { decodeImage } from "../decoders/decodeImage";
-import { ImageBuffer, store } from "../store";
+import { store } from "../store";
 import { readIndexedImage, writeIndexedImage } from "./io";
 
 export const getImage = async (imagePath: string) => {
