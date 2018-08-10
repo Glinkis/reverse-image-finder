@@ -2,6 +2,7 @@ import { app, remote } from "electron";
 import * as fs from "fs";
 import * as path from "path";
 import * as sharp from "sharp";
+import { indexSize } from "../consts";
 import { decodePng } from "../decoders/decodePng";
 import { ImageBuffer, store } from "../store";
 import { readdirAsync, unlinkAsync } from "./promisified";
@@ -31,7 +32,7 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   const buffer = Buffer.from(data.buffer as ArrayBuffer);
 
   const resizedImage = await sharp(buffer, { raw: { channels, width, height } })
-    .resize(64, 64)
+    .resize(indexSize, indexSize)
     .ignoreAspectRatio();
 
   const resizedBuffer = await resizedImage.toBuffer({

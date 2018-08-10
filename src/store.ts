@@ -17,16 +17,16 @@ export interface ImageBuffer {
 export type Decoder = (image: string) => Promise<ImageBuffer>;
 
 export interface Store {
-  image: string | null;
-  directory: string | null;
-  isSearching: boolean;
-  images: string[];
   decoders: Map<string, Decoder>;
-  threshold: number;
-  searchedFiles: number;
+  directory: string | null;
+  image: string | null;
+  images: string[];
   indexed: number;
   indexedDir: string;
+  isSearching: boolean;
   logIndexing: boolean;
+  searchedFiles: number;
+  threshold: number;
 }
 
 export const store = observable({

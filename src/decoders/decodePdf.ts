@@ -1,5 +1,6 @@
 import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
+import { indexSize } from "../consts";
 import { store } from "../store";
 
 // Fix incorrect typing.
@@ -14,8 +15,6 @@ try {
   PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
 }
 
-const MAX_SMALLEST_AXIS = 64;
-
 /**
  * {@link https://github.com/mozilla/pdf.js}
  */
@@ -28,10 +27,10 @@ const decodePdf = async (imagePath: string) => {
   let canvasWidth = width;
   let canvasHeight = height;
 
-  if (width > MAX_SMALLEST_AXIS || height > MAX_SMALLEST_AXIS) {
+  if (width > indexSize || height > indexSize) {
     let scale = 1;
-    canvasWidth = MAX_SMALLEST_AXIS;
-    canvasHeight = MAX_SMALLEST_AXIS;
+    canvasWidth = indexSize;
+    canvasHeight = indexSize;
 
     if (height > width) {
       scale = canvasWidth / width;
