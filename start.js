@@ -9,7 +9,7 @@ const isDevMode = process.execPath.match(/[\\/]electron/);
 
 const createWindow = () => {
   win = new BrowserWindow({
-    width: isDevMode ? 1500 : 500,
+    width: isDevMode ? 1500 : 1000,
     height: isDevMode ? 1000 : 500,
     title: "Reverse Image Finder",
   });
