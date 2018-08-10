@@ -1,15 +1,17 @@
 import * as psdjs from "../../psdjs";
-import { readFileAsync } from "../misc/promisified";
 import { store } from "../store";
+
+// Force import of PSD library.
 console.log(psdjs);
 
 const decodePsd = async (imagePath: string) => {
-  const fileBuffer = await readFileAsync(imagePath);
-
   // @ts-ignore
-  const psd = new PSD(fileBuffer);
+  const psd = PSD.fromFile(imagePath);
+
   psd.parse();
+
   return {
+    channels: psd.image.channels(),
     data: psd.image.pixelData,
     height: psd.image.height(),
     width: psd.image.width()

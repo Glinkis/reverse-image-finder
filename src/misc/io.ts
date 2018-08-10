@@ -26,13 +26,11 @@ export const readIndexedImage = async (name: string) => {
 };
 
 export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
-  const { data, width, height } = image;
+  const { channels, data, width, height } = image;
   const file = path.join(store.indexedDir, name);
   const buffer = Buffer.from(data.buffer as ArrayBuffer);
 
-  const resizedImage = await sharp(buffer, {
-    raw: { channels: 4, width, height }
-  })
+  const resizedImage = await sharp(buffer, { raw: { channels, width, height } })
     .resize(64, 64)
     .ignoreAspectRatio();
 
@@ -44,6 +42,7 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   store.indexed++;
 
   return {
+    channels,
     data: resizedBuffer.data,
     height: resizedBuffer.info.height,
     width: resizedBuffer.info.width

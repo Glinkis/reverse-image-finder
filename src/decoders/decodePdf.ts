@@ -48,7 +48,9 @@ const decodePdf = async (imagePath: string) => {
 
   const canvasContext = create2dContext(canvasWidth, canvasHeight);
   await page.render({ canvasContext, viewport });
-  return canvasContext.getImageData(0, 0, canvasWidth, canvasHeight);
+  const imageData = canvasContext.getImageData(0, 0, canvasWidth, canvasHeight);
+
+  return Object.assign(imageData, { channels: 4 });
 };
 
 const create2dContext = (width: number, height: number) => {

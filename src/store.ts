@@ -8,6 +8,7 @@ export type TypedArray =
   | Uint32Array;
 
 export interface ImageBuffer {
+  channels: number;
   data: TypedArray;
   width: number;
   height: number;
