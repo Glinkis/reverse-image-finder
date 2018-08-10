@@ -32,7 +32,11 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
 
   const resizedImage = await sharp(buffer, {
     raw: { channels: 4, width, height }
-  }).resize(64, 64);
+  })
+    .resize(64, 64)
+    .ignoreAspectRatio();
+
+  console.log(image, resizedImage);
 
   const resizedBuffer = await resizedImage.toBuffer({
     resolveWithObject: true
