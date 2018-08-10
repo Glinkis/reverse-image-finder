@@ -4,7 +4,11 @@ import { ImageBuffer, store } from "../store";
 import { readIndexedImage, writeIndexedImage } from "./io";
 
 export const getImage = async (imagePath: string) => {
-  const hash = hashFilePath(imagePath);
+  const hash = crypto
+    .createHash("md5")
+    .update(imagePath)
+    .digest("hex");
+
   let image: ImageBuffer | undefined;
 
   try {
@@ -24,9 +28,3 @@ export const getImage = async (imagePath: string) => {
   image = await decodeImage(imagePath);
   return await writeIndexedImage(hash, image);
 };
-
-const hashFilePath = (filePath: string) =>
-  crypto
-    .createHash("md5")
-    .update(filePath)
-    .digest("hex");
