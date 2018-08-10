@@ -26,11 +26,5 @@ export const getImage = async (imagePath: string) => {
   }
 
   image = await decodeImage(imagePath);
-
-  try {
-    return await writeIndexedImage(hash, image);
-  } catch (error) {
-    console.log(error, imagePath, image);
-    return await writeIndexedImage(hash, image);
-  }
+  return await writeIndexedImage(hash, image);
 };
