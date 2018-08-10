@@ -29,14 +29,16 @@ const createWindow = () => {
     label: 'Menu',
     submenu: [{
         label: 'Open Devtools',
+        accelerator: "Command+D",
         click() {
           win.webContents.openDevTools();
         }
       },
       {
-        label: 'Exit',
-        click() {
-          app.quit()
+        label: "Quit",
+        accelerator: "Command+Q",
+        click: function () {
+          app.quit();
         }
       }
     ]

@@ -36,8 +36,6 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
     .resize(64, 64)
     .ignoreAspectRatio();
 
-  console.log(image, resizedImage);
-
   const resizedBuffer = await resizedImage.toBuffer({
     resolveWithObject: true
   });
