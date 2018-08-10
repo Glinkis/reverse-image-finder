@@ -2,7 +2,7 @@ import { remote } from "electron";
 import { observer } from "mobx-react";
 import * as React from "react";
 import { extensions } from "../decoders/decodeImage";
-import { getImage } from "../misc/compareImages";
+import { getImage } from "../misc/getImage";
 import { store } from "../store";
 import { imageRow } from "./Images";
 

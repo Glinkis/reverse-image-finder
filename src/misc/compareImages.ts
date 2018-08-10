@@ -1,9 +1,7 @@
-import * as crypto from "crypto";
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
-import { decodeImage } from "../decoders/decodeImage";
-import { ImageBuffer, store } from "../store";
-import { readIndexedImage, writeIndexedImage } from "./io";
+import { store } from "../store";
+import { getImage } from "./getImage";
 
 export const compareImages = async (path1: string, path2: string) => {
   if (path1 === path2) {
@@ -19,38 +17,8 @@ export const compareImages = async (path1: string, path2: string) => {
     null,
     image1.width,
     image1.height,
-    {
-      threshold: store.threshold
-    }
+    { threshold: store.threshold }
   );
 
   return match / image1.data.length < store.threshold;
 };
-
-export const getImage = async (imagePath: string) => {
-  const hash = hashFilePath(imagePath);
-  let image: ImageBuffer | undefined;
-
-  try {
-    image = await readIndexedImage(hash);
-  } catch (error) {
-    console.log(`Corrupt index, re-indexing file://${encodeURI(imagePath)}`);
-  }
-
-  if (image) {
-    return image;
-  }
-
-  if (store.logIndexing) {
-    console.log(`Indexing file://${encodeURI(imagePath)}.`);
-  }
-
-  image = await decodeImage(imagePath);
-  return await writeIndexedImage(hash, image);
-};
-
-const hashFilePath = (filePath: string) =>
-  crypto
-    .createHash("md5")
-    .update(filePath)
-    .digest("hex");
