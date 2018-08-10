@@ -83,22 +83,11 @@
       "!test/*",
       "!psd.js/*"
     ],
-    "publish": {
-      "provider": "github",
-      "owner": "Glinkis",
-      "repo": "reverse-image-finder",
-      "private": false
-    },
     "dmg": {},
     "win": {
       "target": [
-        "nsis",
         "zip"
       ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
     },
     "directories": {
       "output": "release"
