@@ -34,9 +34,7 @@ export const getImage = async (imagePath: string) => {
   try {
     image = await readIndexedImage(hash);
   } catch (error) {
-    console.log(
-      `Index is corrupted, re-indexing file://${encodeURI(imagePath)}`
-    );
+    console.log(`Corrupt index, re-indexing file://${encodeURI(imagePath)}`);
   }
 
   if (image) {
