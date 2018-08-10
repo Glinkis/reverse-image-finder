@@ -10,8 +10,13 @@ const decodePsd = async (imagePath: string) => {
 
   psd.parse();
 
+  let channels = psd.image.channels();
+  if (channels > 4) {
+    channels = 4;
+  }
+
   return {
-    channels: psd.image.channels(),
+    channels,
     data: psd.image.pixelData,
     height: psd.image.height(),
     width: psd.image.width()
