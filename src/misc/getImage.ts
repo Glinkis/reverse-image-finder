@@ -9,7 +9,7 @@ export const getImage = async (imagePath: string) => {
     .update(imagePath)
     .digest("hex");
 
-  let image: ImageBuffer | undefined;
+  let image;
 
   try {
     image = await readIndexedImage(hash);
