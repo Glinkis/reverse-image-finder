@@ -1,10 +1,19 @@
+import * as fs from "fs";
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
 import { Configuration } from "webpack";
 
+const nodeModules: { [key: string]: any } = {};
+fs.readdirSync("node_modules")
+  .filter(item => [".bin"].indexOf(item) === -1) // exclude the .bin folder
+  .forEach(mod => {
+    nodeModules[mod] = "commonjs " + mod;
+  });
+
 export default {
   devtool: "source-map",
   entry: path.resolve(__dirname, "src", "index.tsx"),
+  externals: nodeModules,
   module: {
     rules: [
       {
@@ -14,21 +23,18 @@ export default {
         test: /\.tsx?$/
       },
       {
-        loader: "node-loader",
-        test: /\.node$/
-      },
-      {
         loaders: ["style-loader?sourceMap", "css-loader?sourceMap"],
         test: /\.css$/
       }
     ]
   },
+  node: {
+    __dirname: false,
+    __filename: false
+  },
   optimization: {
     minimize: false,
-    runtimeChunk: true,
-    splitChunks: {
-      chunks: "all"
-    }
+    runtimeChunk: true
   },
   output: {
     path: path.resolve(__dirname, "app")
