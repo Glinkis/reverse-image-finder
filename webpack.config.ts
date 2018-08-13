@@ -12,7 +12,7 @@ fs.readdirSync("node_modules")
 
 export default {
   devtool: "source-map",
-  entry: path.resolve(__dirname, "src", "index.tsx"),
+  entry: path.resolve(__dirname, "src", "main.tsx"),
   externals: nodeModules,
   module: {
     rules: [

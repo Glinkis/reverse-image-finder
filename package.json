@@ -12,10 +12,10 @@
     "start": "npm run build & npm run serve",
     "dist": "npm run build:pro && electron-builder",
     "pack": "npm run build:pro && electron-builder --dir",
-    "test": "electron-mocha -r ts-node/register test/**/*.test.ts --renderer",
-    "test:i": "electron-mocha -r ts-node/register test/**/*.test.ts --interactive",
-    "lint": "tslint src/**/*.ts src/**/*.tsx test/**/*.ts",
-    "lint:fix": "tslint src/**/*.ts src/**/*.tsx test/**/*.ts --fix"
+    "test": "electron-mocha -r ts-node/register src/**/*.test.ts --renderer",
+    "test:i": "electron-mocha -r ts-node/register src/**/*.test.ts --interactive",
+    "lint": "tslint src/**/*.ts src/**/*.tsx",
+    "lint:fix": "tslint src/**/*.ts src/**/*.tsx --fix"
   },
   "repository": {
     "type": "git",
@@ -53,9 +53,9 @@
     "@types/mocha": "5.2.5",
     "@types/pdfjs-dist": "0.1.2",
     "@types/pixelmatch": "4.0.0",
-    "@types/react": "16.4.8",
+    "@types/react": "^16.4.8",
     "@types/react-dom": "16.0.7",
-    "@types/sharp": "0.17.9",
+    "@types/sharp": "^0.17.9",
     "@types/webpack": "4.4.9",
     "@types/webpack-env": "1.13.6",
     "chai": "4.1.2",
@@ -80,7 +80,6 @@
     "productName": "Reverse Image Finder",
     "files": [
       "!src/*",
-      "!test/*",
       "!psd.js/*"
     ],
     "dmg": {},

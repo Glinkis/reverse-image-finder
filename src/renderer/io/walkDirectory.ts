@@ -1,7 +1,7 @@
 import { Stats } from "fs";
 import * as path from "path";
+import { readdirAsync, statAsync } from "../misc/promisified";
 import { store } from "../store";
-import { readdirAsync, statAsync } from "./promisified";
 
 type FileFilter = (file: string) => boolean;
 

@@ -1,7 +1,7 @@
-import * as path from "path";
+import { walkDirectory } from "../io/walkDirectory";
 import { store } from "../store";
+import { checkFileSupport } from "./checkFileSupport";
 import { compareImages } from "./compareImages";
-import { walkDirectory } from "./walkDirectory";
 
 export const searchForFiles = async () => {
   if (!store.directory) {
@@ -25,9 +25,4 @@ const handleImageFile = async (file: string) => {
   if (await compareImages(store.image, file)) {
     store.images.push(file);
   }
-};
-
-export const checkFileSupport = (file: string) => {
-  const ext = path.extname(file).toLowerCase();
-  return store.decoders.has(ext);
 };

@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import * as React from "react";
 import { store } from "../store";
 
-export const LogIndexing = observer(() => {
+export const LogIndexedFiles = observer(() => {
   const onChange = () => {
     store.logIndexing = !store.logIndexing;
   };

@@ -1,6 +1,7 @@
+import * as path from "path";
 import * as PDFJSLib from "pdfjs-dist";
 import { PDFJS as PDFJSType } from "pdfjs-dist";
-import { indexSize } from "../consts";
+import { indexSize } from "../misc/consts";
 import { store } from "../store";
 
 // Fix incorrect typing.
@@ -9,10 +10,11 @@ const PDFJS: typeof PDFJSType = PDFJSLib as any;
 try {
   // @ts-ignore
   // tslint:disable
-  PDFJS.GlobalWorkerOptions.workerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
+  PDFJS.GlobalWorkerOptions.workerSrc = require("file-loader?name=[name].[ext]!../../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
 } catch {
   // @ts-ignore
-  PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
+  // prettier-ignore
+  PDFJS.GlobalWorkerOptions.workerSrc = path.join(__dirname, "../../../", "node_modules/pdfjs-dist/build/pdf.worker.min.js");
 }
 
 /**
@@ -20,6 +22,7 @@ try {
  */
 const decodePdf = async (imagePath: string) => {
   const pdf = await PDFJS.getDocument(imagePath);
+  console.log(pdf);
   const page = await pdf.getPage(1);
   let viewport = page.getViewport(1);
 

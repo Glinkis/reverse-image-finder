@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ClearIndexed } from "./ClearIndexed";
 import { Images } from "./Images";
-import { LogIndexing } from "./LogIndexing";
+import { LogIndexedFiles } from "./LogIndexing";
 import { OpenIndexedDirectory } from "./OpenIndexedDirectory";
 import { Search } from "./Search";
 import { SearchStats } from "./SearchStats";
@@ -20,7 +20,7 @@ export const App = () => (
       <SelectedDirectory />
       <OpenIndexedDirectory />
       <ClearIndexed />
-      <LogIndexing />
+      <LogIndexedFiles />
       <Threshold />
       <Search />
       <SearchStats />

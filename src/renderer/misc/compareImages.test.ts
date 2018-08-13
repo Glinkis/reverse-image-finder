@@ -1,15 +1,14 @@
 import { expect } from "chai";
-import * as path from "path";
-import { compareImages } from "../../src/misc/compareImages";
-import { store } from "../../src/store";
+import { store } from "../store";
+import { compareImages } from "./compareImages";
+import { assets } from "./consts";
+
+async function compareAssets(a: string, b: string) {
+  store.threshold = 0.05;
+  return await compareImages(`${assets}/${a}`, `${assets}/${b}`);
+}
 
 describe("compareImages", () => {
-  async function compareAssets(a: string, b: string) {
-    store.threshold = 0.05;
-    const assets = path.join(__dirname, "../", "assets");
-    return await compareImages(`${assets}/${a}`, `${assets}/${b}`);
-  }
-
   describe("compare same", () => {
     it("returns true for same JPG (16x16)", async () => {
       expect(await compareAssets("img0.jpg", "img0.jpg")).to.be.true;

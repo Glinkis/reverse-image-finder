@@ -1,4 +1,4 @@
-import * as psdjs from "../../psdjs";
+import * as psdjs from "../../../psdjs";
 import { store } from "../store";
 
 // Force import of PSD library.
