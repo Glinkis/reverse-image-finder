@@ -3,8 +3,7 @@ import * as path from "path";
 import { store } from "../../renderer/store";
 import { walkDirectory } from "../io/walkDirectory";
 import { checkFileSupport } from "./checkFileSupport";
-
-const assets = path.join(__dirname, "../", "assets");
+import { assets } from "./consts";
 
 describe("walkDirectory", () => {
   it("finds a deeply nested image", async () => {
