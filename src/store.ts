@@ -22,7 +22,6 @@ export interface Store {
   image: string | null;
   images: string[];
   indexed: number;
-  indexedDir: string;
   isSearching: boolean;
   logIndexing: boolean;
   searchedFiles: number;
@@ -35,7 +34,6 @@ export const store = observable({
   image: null,
   images: [],
   indexed: 0,
-  indexedDir: "",
   isSearching: false,
   logIndexing: false,
   searchedFiles: 0,

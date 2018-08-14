@@ -1,7 +1,8 @@
 import * as crypto from "crypto";
 import { decodeImage } from "../decoders/decodeImage";
+import { readIndexedImage } from "../io/readIndexedImage";
+import { writeIndexedImage } from "../io/writeIndexedImage";
 import { store } from "../store";
-import { readIndexedImage, writeIndexedImage } from "./io";
 
 export const getImage = async (imagePath: string) => {
   const hash = crypto
