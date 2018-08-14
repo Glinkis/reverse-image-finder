@@ -1,8 +1,6 @@
 import { expect } from "chai";
-import * as path from "path";
 import { decodePdf } from "../../src/decoders/decodePdf";
-
-const assets = path.join(__dirname, "../", "assets");
+import { assets } from "../paths";
 
 describe("decodePdf", () => {
   it("imports PDF file 1 with correct size", async () => {

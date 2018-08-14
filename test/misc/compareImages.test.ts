@@ -1,12 +1,11 @@
 import { expect } from "chai";
-import * as path from "path";
 import { compareImages } from "../../src/misc/compareImages";
 import { store } from "../../src/store";
+import { assets } from "../paths";
 
 describe("compareImages", () => {
   async function compareAssets(a: string, b: string) {
     store.threshold = 0.05;
-    const assets = path.join(__dirname, "../", "assets");
     return await compareImages(`${assets}/${a}`, `${assets}/${b}`);
   }
 
