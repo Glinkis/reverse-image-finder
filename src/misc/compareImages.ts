@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
-import { store } from "../store";
+import { store, ImageBuffer } from "../store";
 import { getImage } from "./getImage";
 
 export const compareImages = async (path1: string, path2: string) => {
@@ -12,42 +12,37 @@ export const compareImages = async (path1: string, path2: string) => {
   const image2 = await getImage(path2);
 
   if (image1.channels === 3 && image2.channels === 4) {
-    image1.data = addAlphaChannel(image1.data);
-  }
-
-  if (image1.channels === 4 && image2.channels === 3) {
-    image2.data = addAlphaChannel(image2.data);
+    addAlphaChannel(image1);
+  } else if (image1.channels === 4 && image2.channels === 3) {
+    addAlphaChannel(image2);
   }
 
   if (image1.data.byteLength !== image2.data.byteLength) {
-    throw new Error("Image buffers are not of the same size.");
+    throw new Error("Image buffers are not the same size.");
   }
 
   if (image1.data.equals(image2.data)) {
     return true;
   }
 
-  const match = pixelmatch(
-    image1.data,
-    image2.data,
-    null,
-    image1.width,
-    image1.height,
-    { threshold: store.threshold }
-  );
+  const match = pixelmatch(image1.data, image2.data, null, image1.width, image1.height, {
+    threshold: store.threshold
+  }); // prettier-ignore
 
   return match / image1.data.length < store.threshold;
 };
 
-const addAlphaChannel = (rgb: Buffer) => {
-  const rgba = new Uint8Array((rgb.length / 3) * 4);
+const addAlphaChannel = (imageBuffer: ImageBuffer) => {
+  const size = imageBuffer.data.length;
+  const rgba = new Uint8Array((size / 3) * 4);
 
-  for (let i = 0, j = 0; i < rgb.length; i += 3, j += 4) {
-    rgba[j + 0] = rgb[i + 0];
-    rgba[j + 1] = rgb[i + 1];
-    rgba[j + 2] = rgb[i + 2];
+  for (let i = 0, j = 0; i < size; i += 3, j += 4) {
+    rgba[j + 0] = imageBuffer.data[i + 0];
+    rgba[j + 1] = imageBuffer.data[i + 1];
+    rgba[j + 2] = imageBuffer.data[i + 2];
     rgba[j + 3] = 255;
   }
 
-  return Buffer.from(rgba.buffer as ArrayBuffer);
+  imageBuffer.data = Buffer.from(rgba.buffer as ArrayBuffer);
+  imageBuffer.channels = 4;
 };
