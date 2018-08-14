@@ -22,8 +22,13 @@ const handleImageFile = async (file: string) => {
   if (!store.image || file === store.image) {
     return;
   }
-  if (await compareImages(store.image, file)) {
-    store.images.push(file);
+
+  try {
+    if (await compareImages(store.image, file)) {
+      store.images.push(file);
+    }
+  } catch (error) {
+    console.error(error, file);
   }
 };
 
