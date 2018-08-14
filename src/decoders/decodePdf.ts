@@ -9,10 +9,10 @@ const PDFJS: typeof PDFJSType = PDFJSLib as any;
 try {
   // @ts-ignore
   // tslint:disable
-  PDFJS.GlobalWorkerOptions.workerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.min.js");
+  PDFJS.GlobalWorkerOptions.workerSrc = require("file-loader?name=[name].[ext]!../../node_modules/pdfjs-dist/build/pdf.worker.js");
 } catch {
   // @ts-ignore
-  PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.min.js`;
+  PDFJS.GlobalWorkerOptions.workerSrc = `${__dirname}/../../node_modules/pdfjs-dist/build/pdf.worker.js`;
 }
 
 /**
