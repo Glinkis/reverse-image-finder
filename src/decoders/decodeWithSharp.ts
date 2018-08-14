@@ -7,15 +7,15 @@ import { store } from "../store";
  * {@link https://github.com/lovell/sharp}
  */
 export const decodeWithSharp = async (imagePath: string) => {
-  const image = sharp(imagePath);
-  const buffer = await image.raw().toBuffer({ resolveWithObject: true });
-  const { width, height, channels } = buffer.info;
+  const buffer = await sharp(imagePath)
+    .raw()
+    .toBuffer({ resolveWithObject: true });
 
   return {
-    channels,
+    channels: buffer.info.channels,
     data: buffer.data,
-    height,
-    width
+    height: buffer.info.height,
+    width: buffer.info.height
   };
 };
 

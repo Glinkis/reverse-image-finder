@@ -5,14 +5,14 @@ import "./decodePsd";
 import "./decodeWithSharp";
 
 export const decodeImage = (imagePath: string) => {
-  const ext = path.extname(imagePath).toLowerCase();
-  const decode = store.decoders.get(ext);
+  const extension = path.extname(imagePath).toLowerCase();
+  const decode = store.decoders.get(extension);
 
   if (decode) {
     return decode(imagePath);
   }
 
-  throw new Error(`${ext} is not a supported file type.`);
+  throw new Error(`${extension} is not a supported file type.`);
 };
 
 export const extensions = [...store.decoders.keys()].map(key =>
