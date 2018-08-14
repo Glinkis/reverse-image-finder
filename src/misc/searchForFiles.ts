@@ -1,7 +1,7 @@
 import * as path from "path";
+import { walkDirectory } from "../io/walkDirectory";
 import { store } from "../store";
 import { compareImages } from "./compareImages";
-import { walkDirectory } from "./walkDirectory";
 
 export const searchForFiles = async () => {
   if (!store.directory) {

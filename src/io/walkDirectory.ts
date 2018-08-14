@@ -1,19 +1,12 @@
-import { Stats } from "fs";
 import * as path from "path";
+import { readdirAsync, statAsync } from "../misc/promisified";
 import { store } from "../store";
-import { readdirAsync, statAsync } from "./promisified";
 
 type FileFilter = (file: string) => boolean;
-
-type DirWalker = (
-  dir: string,
-  callback: (file: string) => void,
-  filter?: FileFilter
-) => void;
+type DirWalker = (dir: string, callback: (file: string) => void, filter?: FileFilter) => void; // prettier-ignore
 
 export const walkDirectory: DirWalker = async (dir, callback, filter) => {
-  let list: string[] | undefined;
-
+  let list;
   try {
     list = await readdirAsync(dir);
   } catch (error) {
@@ -28,8 +21,7 @@ export const walkDirectory: DirWalker = async (dir, callback, filter) => {
 
     file = path.resolve(dir, file);
 
-    let stat: Stats | undefined;
-
+    let stat;
     try {
       stat = await statAsync(file);
     } catch (error) {
