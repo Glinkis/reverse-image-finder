@@ -4,7 +4,11 @@ import { store } from "../store";
 // Force import of PSD library.
 console.log(psdjs);
 
-const decodePsd = async (imagePath: string) => {
+/**
+ * Decodes PSD files with the psd.js library.
+ * {@link https://github.com/meltingice/psd.js}
+ */
+export const decodePsd = async (imagePath: string) => {
   // @ts-ignore
   const psd = PSD.fromFile(imagePath);
 

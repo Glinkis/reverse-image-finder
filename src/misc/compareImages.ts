@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
-import { store, ImageBuffer } from "../store";
+import { ImageBuffer, store } from "../store";
 import { getImage } from "./getImage";
 
 export const compareImages = async (path1: string, path2: string) => {

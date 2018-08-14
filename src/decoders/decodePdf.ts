@@ -18,7 +18,7 @@ try {
 /**
  * {@link https://github.com/mozilla/pdf.js}
  */
-const decodePdf = async (imagePath: string) => {
+export const decodePdf = async (imagePath: string) => {
   const pdf = await PDFJS.getDocument(imagePath);
   const page = await pdf.getPage(1);
   let viewport = page.getViewport(1);
