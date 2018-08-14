@@ -1,9 +1,9 @@
 import { shell } from "electron";
 import * as React from "react";
-import { store } from "../store";
+import { getIndexDir } from "../io/getIndexDir";
 
 export const OpenIndexedDirectory = () => (
-  <button onClick={() => shell.showItemInFolder(store.indexedDir + "/")}>
+  <button onClick={() => shell.showItemInFolder(getIndexDir() + "/")}>
     Open Indexed Folder
   </button>
 );
