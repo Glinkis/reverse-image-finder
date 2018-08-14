@@ -18,15 +18,15 @@ const SearchedFiles = observer(() => {
 });
 
 const IndexedFiles = observer(() => {
-  if (!store.indexed) {
+  if (!store.indexedFiles) {
     return null;
   }
-  return <div>{`Indexed ${store.indexed} images.`}</div>;
+  return <div>{`Indexed ${store.indexedFiles} images.`}</div>;
 });
 
 const MatchedFiles = observer(() => {
-  if (!store.images.length) {
+  if (!store.matches.length) {
     return null;
   }
-  return <div>{`Matched ${store.images.length} images.`}</div>;
+  return <div>{`Matched ${store.matches.length} images.`}</div>;
 });

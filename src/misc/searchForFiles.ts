@@ -9,7 +9,7 @@ export const searchForFiles = async () => {
   }
 
   store.searchedFiles = 0;
-  store.indexed = 0;
+  store.indexedFiles = 0;
   store.isSearching = true;
 
   await walkDirectory(store.directory, handleImageFile, checkFileSupport);
@@ -25,7 +25,7 @@ const handleImageFile = async (file: string) => {
 
   try {
     if (await compareImages(store.image, file)) {
-      store.images.push(file);
+      store.matches.push(file);
     }
   } catch (error) {
     console.error(error, file);

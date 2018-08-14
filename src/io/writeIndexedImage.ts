@@ -18,7 +18,7 @@ export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   });
 
   await resizedImage.png().toFile(file);
-  store.indexed++;
+  store.indexedFiles++;
 
   return {
     channels,

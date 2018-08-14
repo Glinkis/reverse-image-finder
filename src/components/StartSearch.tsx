@@ -7,7 +7,7 @@ export const StartSearch = () => (
 );
 
 const startSearch = () => {
-  store.images = [];
+  store.matches = [];
   store.isSearching = true;
   searchForFiles();
 };

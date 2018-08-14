@@ -20,22 +20,22 @@ export interface Store {
   decoders: Map<string, Decoder>;
   directory: string | null;
   image: string | null;
-  images: string[];
-  indexed: number;
+  indexedFiles: number;
   isSearching: boolean;
   logIndexing: boolean;
+  matches: string[];
   searchedFiles: number;
   threshold: number;
 }
 
-export const store = observable({
+export const store = observable<Store>({
   decoders: new Map<string, Decoder>(),
   directory: null,
   image: null,
-  images: [],
-  indexed: 0,
+  indexedFiles: 0,
   isSearching: false,
   logIndexing: false,
+  matches: [],
   searchedFiles: 0,
   threshold: 0.03
-} as Store);
+});
