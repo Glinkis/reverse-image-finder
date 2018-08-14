@@ -24,6 +24,7 @@ export const decodePdf = async (imagePath: string) => {
   let viewport = page.getViewport(1);
 
   const { width, height } = viewport;
+
   let canvasWidth = width;
   let canvasHeight = height;
 
@@ -42,7 +43,7 @@ export const decodePdf = async (imagePath: string) => {
       canvasWidth = width * scale;
     }
 
-    viewport = viewport.clone({ scale } as any);
+    viewport = page.getViewport(scale);
   }
 
   const canvasContext = create2dContext(canvasWidth, canvasHeight);
