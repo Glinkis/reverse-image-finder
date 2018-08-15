@@ -4,7 +4,12 @@ import { readIndexedImage } from "../io/readIndexedImage";
 import { writeIndexedImage } from "../io/writeIndexedImage";
 import { store } from "../store";
 
-export const getImage = async (imagePath: string) => {
+/**
+ * Gets an indexed version of the image,
+ * and indexes the image if none exists.
+ * @param imagePath - Path to the image.
+ */
+export const getIndexedImage = async (imagePath: string) => {
   const hash = crypto
     .createHash("md5")
     .update(imagePath)

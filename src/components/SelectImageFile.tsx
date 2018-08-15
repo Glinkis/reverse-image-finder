@@ -1,8 +1,8 @@
 import { remote } from "electron";
 import { observer } from "mobx-react";
 import * as React from "react";
-import { extensions } from "../decoders/decodeImage";
-import { getImage } from "../misc/getImage";
+import { extensions } from "../misc/extensions";
+import { getIndexedImage } from "../misc/getImage";
 import { store } from "../store";
 import { imageRow } from "./Images";
 
@@ -11,10 +11,10 @@ export const SelectImageFile = () => (
 );
 
 export const SelectedImageFile = observer(() => {
-  if (!store.image) {
-    return null;
+  if (store.image) {
+    return imageRow(store.image);
   }
-  return imageRow(store.image);
+  return null;
 });
 
 const openImage = () => {
@@ -23,8 +23,9 @@ const openImage = () => {
     properties: ["openFile"],
     title: "Select Image"
   });
+
   if (image) {
     store.image = image[0];
-    getImage(store.image);
+    getIndexedImage(store.image);
   }
 };

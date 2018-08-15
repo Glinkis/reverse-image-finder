@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as pixelmatch from "pixelmatch";
 import { store } from "../store";
-import { getImage } from "./getImage";
+import { getIndexedImage } from "./getImage";
 import { normalizeChannels } from "./normalizeChannels";
 
 /**
@@ -14,8 +14,8 @@ export const compareImages = async (path1: string, path2: string) => {
     return true;
   }
 
-  const image1 = await getImage(path1);
-  const image2 = await getImage(path2);
+  const image1 = await getIndexedImage(path1);
+  const image2 = await getIndexedImage(path2);
 
   normalizeChannels(image1, image2);
 

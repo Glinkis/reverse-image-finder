@@ -2,8 +2,8 @@ import * as sharp from "sharp";
 import { store } from "../store";
 
 /**
- * Utilizes the sharp library to decode multiple
- * different image types.
+ * Utilizes the sharp library to decode
+ * multiple different image types.
  * {@link https://github.com/lovell/sharp}
  */
 export const decodeWithSharp = async (imagePath: string) => {

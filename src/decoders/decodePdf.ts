@@ -16,6 +16,7 @@ try {
 }
 
 /**
+ * Decodes PDF images witht he pdf.js library.
  * {@link https://github.com/mozilla/pdf.js}
  */
 export const decodePdf = async (imagePath: string) => {
