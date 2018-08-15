@@ -2,10 +2,11 @@ import * as path from "path";
 import { readdirAsync, statAsync } from "../misc/promisified";
 import { store } from "../store";
 
-type FileFilter = (file: string) => boolean;
-type DirWalker = (dir: string, callback: (file: string) => void, filter?: FileFilter) => void; // prettier-ignore
-
-export const walkDirectory: DirWalker = async (dir, callback, filter) => {
+export const walkDirectory = async (
+  dir: string,
+  callback: (file: string) => void,
+  filter?: (file: string) => void
+) => {
   let list;
   try {
     list = await readdirAsync(dir);
