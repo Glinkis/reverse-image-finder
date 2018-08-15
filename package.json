@@ -78,6 +78,7 @@
   },
   "build": {
     "productName": "Reverse Image Finder",
+    "asar": false,
     "files": [
       "!src/*",
       "!test/*",
