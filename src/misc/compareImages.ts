@@ -22,9 +22,10 @@ export const compareImages = async (path1: string, path2: string) => {
     return true;
   }
 
+  // prettier-ignore
   const match = pixelmatch(image1.data, image2.data, null, image1.width, image1.height, {
     threshold: store.threshold
-  }); // prettier-ignore
+  });
 
   return match / image1.data.length < store.threshold;
 };
