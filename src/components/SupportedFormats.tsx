@@ -1,5 +1,5 @@
 import * as React from "react";
-import { extensions } from "../decoders/decodeImage";
+import { extensions } from "../misc/extensions";
 
 export const SupportedFormats = () => (
   <div>
