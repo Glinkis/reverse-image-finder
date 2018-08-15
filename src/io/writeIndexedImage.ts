@@ -5,25 +5,29 @@ import { ImageBuffer, store } from "../store";
 import { getIndexDir } from "./getIndexDir";
 
 export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
-  const { channels, data, width, height } = image;
   const file = path.join(getIndexDir(), name);
-  const buffer = Buffer.from(data.buffer as ArrayBuffer);
+  let { height, width, channels } = image;
+  const buffer = Buffer.from(image.data.buffer as ArrayBuffer);
 
-  const resizedImage = await sharp(buffer, { raw: { channels, width, height } })
+  // Use a maximum of four channels (red, green, blue, alpha).
+  if (channels > 4) {
+    channels = 4;
+  }
+
+  const sharpInstance = await sharp(buffer, {
+    raw: { channels, height, width }
+  });
+
+  const resizedSharpInstance = sharpInstance
     .resize(indexSize, indexSize)
     .ignoreAspectRatio();
 
-  const resizedBuffer = await resizedImage.toBuffer({
-    resolveWithObject: true
-  });
+  const data = await resizedSharpInstance.toBuffer();
+  width = indexSize;
+  height = indexSize;
 
-  await resizedImage.png().toFile(file);
+  await resizedSharpInstance.png().toFile(file);
   store.indexedFiles++;
 
-  return {
-    channels,
-    data: resizedBuffer.data,
-    height: resizedBuffer.info.height,
-    width: resizedBuffer.info.width
-  };
+  return { channels, height, width, data };
 };
