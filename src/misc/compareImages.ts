@@ -4,6 +4,11 @@ import { store } from "../store";
 import { getImage } from "./getImage";
 import { normalizeChannels } from "./normalizeChannels";
 
+/**
+ * Compares two images visually.
+ * @param path1 - Path to the first image.
+ * @param path2 - Path to the second image.
+ */
 export const compareImages = async (path1: string, path2: string) => {
   if (path1 === path2) {
     return true;

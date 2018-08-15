@@ -1,5 +1,10 @@
 import { ImageBuffer } from "../store";
 
+/**
+ * Adds extra channel data to the image.
+ * @param image - Image to add channels to.
+ * @param target - Target number of channels.
+ */
 export const addChannels = (image: ImageBuffer, target: number) => {
   const { width, height, data, channels } = image;
   const array = new Uint8Array(width * height * target);

@@ -4,6 +4,11 @@ import { indexSize } from "../consts";
 import { ImageBuffer, store } from "../store";
 import { getIndexDir } from "./getIndexDir";
 
+/**
+ * Writes indexed image into the index folder.
+ * @param name - Name of the file.
+ * @param image - Image to index.
+ */
 export const writeIndexedImage = async (name: string, image: ImageBuffer) => {
   const file = path.join(getIndexDir(), name);
   let { height, width, channels } = image;
