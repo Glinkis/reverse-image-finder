@@ -4,7 +4,7 @@
 
 Program for doing local reverse image search.
 
-## to get started:
+## To get started:
 ```
 npm install
 npm start
