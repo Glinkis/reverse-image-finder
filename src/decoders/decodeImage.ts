@@ -16,5 +16,5 @@ export const decodeImage = (imagePath: string) => {
     return decode(imagePath);
   }
 
-  throw new Error(`${extension} is not a supported file type.`);
+  throw new TypeError(`${extension} is not a supported file type.`);
 };
