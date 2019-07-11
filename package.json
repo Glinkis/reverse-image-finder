@@ -34,7 +34,7 @@
     "electron-reload": "1.2.5",
     "iconv-lite": "~ 0.4.4",
     "jspack": "~ 0.0.3",
-    "lodash": "~ 2.4",
+    "lodash": "~ 4.17",
     "mobx": "5.0.3",
     "mobx-react": "5.2.3",
     "parse-engine-data": "~ 0.1",
