@@ -62,7 +62,7 @@
     "coffee-loader": "0.9.0",
     "coffeescript": "1.12.7",
     "css-loader": "1.0.0",
-    "electron": "2.0.7",
+    "electron": "15.5.5",
     "electron-builder": "20.27.1",
     "electron-mocha": "6.0.4",
     "file-loader": "1.1.11",
